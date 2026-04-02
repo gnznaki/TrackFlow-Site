@@ -722,6 +722,204 @@
       .download-grid { grid-template-columns: 1fr; }
     }
 
+    /* ── BOARD DRAG ANIMATION ───────────────────────────────────────────── */
+    .anim-section {
+      padding: 80px 24px;
+      max-width: 1080px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .anim-board-outer {
+      margin-top: 52px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .anim-board {
+      position: relative;
+      display: flex;
+      gap: 14px;
+      max-width: 700px;
+      width: 100%;
+    }
+
+    .anim-col {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 0;
+
+      /* scroll-enter */
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.35s ease, background 0.35s ease;
+    }
+
+    .anim-col.anim-visible { opacity: 1; transform: translateY(0); }
+    .anim-col:nth-child(1) { transition-delay: 0s; }
+    .anim-col:nth-child(2) { transition-delay: 0.1s; }
+    .anim-col:nth-child(3) { transition-delay: 0.2s; }
+
+    .anim-col-head {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2px;
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--text3);
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+
+    .anim-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+    .anim-count {
+      margin-left: auto;
+      font-size: 9px;
+      color: var(--text3);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1px 7px;
+    }
+
+    .anim-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 11px 11px 10px;
+      transition: opacity 0.3s ease;
+    }
+
+    .anim-card-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 5px; }
+    .anim-card-tag   { font-size: 10px; font-weight: 700; }
+    .anim-card-daw   { font-size: 9px; font-weight: 600; font-family: 'Space Mono', monospace; margin-top: 4px; color: var(--text3); }
+
+    /* Ghost slot in col1 when card is flying */
+    .anim-ghost {
+      border-style: dashed;
+      border-color: transparent;
+      background: transparent;
+      opacity: 0;
+      transition: opacity 0.3s ease, border-color 0.3s ease;
+      min-height: 62px;
+    }
+
+    .anim-board.is-lifting  .anim-ghost,
+    .anim-board.is-dragging .anim-ghost { opacity: 0.45; border-color: rgba(200,255,71,0.2); }
+
+    /* Drop zone indicator in col3 */
+    .anim-drop-zone {
+      height: 0;
+      overflow: hidden;
+      border-radius: 8px;
+      background: rgba(200,255,71,0.05);
+      border: 1.5px dashed transparent;
+      transition: height 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .anim-board.is-over-target .anim-drop-zone {
+      height: 60px;
+      border-color: rgba(200,255,71,0.4);
+      background: rgba(200,255,71,0.06);
+    }
+
+    /* Col3 glow on drag-over */
+    .anim-board.is-over-target .anim-col:nth-child(3) {
+      border-color: rgba(200,255,71,0.3);
+      background: linear-gradient(180deg, rgba(200,255,71,0.03) 0%, var(--surface) 80%);
+    }
+
+    /* The flying card — absolutely positioned, driven by JS */
+    .anim-card-flying {
+      position: absolute;
+      z-index: 20;
+      opacity: 0;
+      cursor: grabbing;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface2);
+      padding: 11px 11px 10px;
+      pointer-events: none;
+      transition:
+        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.35s ease,
+        border-color 0.25s ease,
+        opacity 0.3s ease;
+      will-change: transform;
+    }
+
+    .anim-board.is-lifting .anim-card-flying {
+      transform: translate(0, -16px) rotate(2.2deg) scale(1.055) !important;
+      box-shadow: 0 22px 60px rgba(0,0,0,0.75), 0 0 0 1.5px rgba(200,255,71,0.5);
+      border-color: rgba(200,255,71,0.45);
+      background: var(--surface);
+    }
+
+    .anim-board.is-dragging .anim-card-flying {
+      box-shadow: 0 22px 60px rgba(0,0,0,0.75), 0 0 0 1.5px rgba(200,255,71,0.5);
+      border-color: rgba(200,255,71,0.45);
+      background: var(--surface);
+      transition:
+        transform 1.7s cubic-bezier(0.4, 0, 0.25, 1),
+        box-shadow 0.35s ease,
+        border-color 0.25s ease;
+    }
+
+    .anim-board.is-dropping .anim-card-flying {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+      border-color: rgba(200,255,71,0.2);
+      transition:
+        transform 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+        box-shadow 0.3s ease,
+        border-color 0.25s ease;
+    }
+
+    .anim-board.is-settled .anim-card-flying {
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+      border-color: var(--border);
+      background: var(--surface2);
+      transition:
+        transform 0.15s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease;
+    }
+
+    /* Cursor dot that follows the card */
+    .anim-cursor {
+      position: absolute;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: rgba(200,255,71,0.9);
+      box-shadow: 0 0 0 3px rgba(200,255,71,0.2);
+      pointer-events: none;
+      z-index: 30;
+      opacity: 0;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.25s ease;
+    }
+
+    .anim-board.is-lifting  .anim-cursor,
+    .anim-board.is-dragging .anim-cursor,
+    .anim-board.is-dropping .anim-cursor { opacity: 1; }
+
+    @media (max-width: 768px) {
+      .anim-board { flex-direction: column; max-width: 320px; }
+      .anim-board .anim-col:nth-child(2),
+      .anim-board .anim-col:nth-child(3) { display: none; }
+      .anim-card-flying, .anim-cursor { display: none; }
+    }
+
     /* ── DIVIDER ─────────────────────────────────────────────────────────── */
     .divider {
       width: 100%;
@@ -880,6 +1078,90 @@
 
   <div class="divider"></div>
 
+  <!-- BOARD DRAG ANIMATION -->
+  <section class="anim-section" id="in-action">
+    <div class="section-label">See it work</div>
+    <div class="section-title">One drag. Whole workflow.</div>
+    <div class="section-sub">Move a project between stages as fast as you think.</div>
+
+    <div class="anim-board-outer">
+      <div class="anim-board" id="anim-board">
+
+        <!-- Col 1: Idea Dump -->
+        <div class="anim-col">
+          <div class="anim-col-head">
+            <div class="anim-dot" style="background:#444"></div>
+            <span>Idea Dump</span>
+            <span class="anim-count">3</span>
+          </div>
+          <!-- ghost slot — shows dashed when card is being dragged -->
+          <div class="anim-card anim-ghost" id="anim-ghost">
+            <div class="anim-card-title">NEON HAZE — main</div>
+            <div class="anim-card-tag" style="color:#47c8ff">mixing</div>
+          </div>
+          <div class="anim-card">
+            <div class="anim-card-title">808 experiment</div>
+            <div class="anim-card-tag" style="color:#c8ff47">WIP</div>
+            <div class="anim-card-daw">FLP</div>
+          </div>
+          <div class="anim-card">
+            <div class="anim-card-title">midnight loop v3</div>
+            <div class="anim-card-tag" style="color:#ff8c00">trap</div>
+            <div class="anim-card-daw">FLP</div>
+          </div>
+        </div>
+
+        <!-- Col 2: In Progress -->
+        <div class="anim-col">
+          <div class="anim-col-head">
+            <div class="anim-dot" style="background:var(--accent)"></div>
+            <span style="color:var(--accent)">In Progress</span>
+            <span class="anim-count">2</span>
+          </div>
+          <div class="anim-card">
+            <div class="anim-card-title">collab_session_03</div>
+            <div class="anim-card-tag" style="color:#b847ff">collab</div>
+            <div class="anim-card-daw">ALS</div>
+          </div>
+          <div class="anim-card">
+            <div class="anim-card-title">CARBON EP — master</div>
+            <div class="anim-card-tag" style="color:#3af0b0">mixing</div>
+            <div class="anim-card-daw">ALS</div>
+          </div>
+        </div>
+
+        <!-- Col 3: Mixing — drop target -->
+        <div class="anim-col">
+          <div class="anim-col-head">
+            <div class="anim-dot" style="background:#47c8ff"></div>
+            <span style="color:#47c8ff">Mixing</span>
+            <span class="anim-count">1</span>
+          </div>
+          <!-- drop zone indicator (height animates to 60px on hover) -->
+          <div class="anim-drop-zone" id="anim-drop-zone"></div>
+          <div class="anim-card">
+            <div class="anim-card-title">VOID — full session</div>
+            <div class="anim-card-tag" style="color:#4780ff">review</div>
+            <div class="anim-card-daw">PTX</div>
+          </div>
+        </div>
+
+        <!-- Flying/dragging card (absolutely positioned, driven by JS) -->
+        <div class="anim-card anim-card-flying" id="anim-flying">
+          <div class="anim-card-title">NEON HAZE — main</div>
+          <div class="anim-card-tag" style="color:#47c8ff">mixing</div>
+          <div class="anim-card-daw">ALS</div>
+        </div>
+
+        <!-- Cursor dot -->
+        <div class="anim-cursor" id="anim-cursor"></div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
   <!-- FEATURES -->
   <section id="features">
     <div class="section-label">Features</div>
@@ -1018,8 +1300,8 @@
   <!-- PRICING -->
   <section id="pricing" style="text-align:center;">
     <div class="section-label" style="text-align:center">Pricing</div>
-    <div class="section-title" style="max-width:100%;margin-left:auto;margin-right:auto;margin-bottom:14px">Simple. No subscription.</div>
-    <div class="section-sub" style="max-width:420px;margin:0 auto 52px">Start free. Upgrade once when you need collaboration and cloud sync. Pay once, own it forever.</div>
+    <div class="section-title" style="max-width:100%;margin-left:auto;margin-right:auto;margin-bottom:14px">Free now. More coming soon.</div>
+    <div class="section-sub" style="max-width:480px;margin:0 auto 52px">The core app is <strong style="color:var(--text)">completely free</strong> and always will be. Premium features — collaboration, cloud sync — are on the way as an optional one-time upgrade.</div>
 
     <div class="pricing-wrap">
 
@@ -1059,10 +1341,10 @@
 
       <!-- Premium -->
       <div class="pricing-card featured">
-        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-badge" style="background:rgba(200,255,71,0.15);color:var(--accent);border:1px solid rgba(200,255,71,0.3)">Coming Soon</div>
         <div class="pricing-name" style="color:var(--accent)">Premium</div>
-        <div class="pricing-price" style="color:var(--accent)"><sup>$</sup>15</div>
-        <div class="pricing-period">one-time payment · no renewal</div>
+        <div class="pricing-price" style="color:var(--accent);font-size:28px;padding-top:4px">On the way</div>
+        <div class="pricing-period">one-time payment · no subscription · ever</div>
         <ul class="pricing-features">
           <li>
             <svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
@@ -1194,5 +1476,148 @@
     </div>
   </footer>
 
+  <script>
+  // ── Scroll-triggered column entrance ──────────────────────────────────────
+  (function() {
+    var cols = document.querySelectorAll('.anim-col');
+    var board = document.getElementById('anim-board');
+    if (!board) return;
+
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          cols.forEach(function(c) { c.classList.add('anim-visible'); });
+          io.disconnect();
+          setTimeout(startDragAnim, 800); // start drag demo after columns have settled
+        }
+      });
+    }, { threshold: 0.35 });
+
+    io.observe(board);
+  })();
+
+  // ── Board drag animation ───────────────────────────────────────────────────
+  function startDragAnim() {
+    var board    = document.getElementById('anim-board');
+    var flyCard  = document.getElementById('anim-flying');
+    var ghost    = document.getElementById('anim-ghost');
+    var cursor   = document.getElementById('anim-cursor');
+    if (!board || !flyCard || !ghost || !cursor) return;
+
+    var running = false;
+
+    function measure() {
+      var br   = board.getBoundingClientRect();
+      var gr   = ghost.getBoundingClientRect();
+      var dz   = document.getElementById('anim-drop-zone');
+      var dzr  = dz.getBoundingClientRect();
+
+      // Flying card starts at same position as ghost
+      flyCard.style.left  = (gr.left  - br.left) + 'px';
+      flyCard.style.top   = (gr.top   - br.top)  + 'px';
+      flyCard.style.width = gr.width  + 'px';
+
+      // Compute where it needs to land (drop zone, same left offset as ghost within its col)
+      var col3     = board.querySelector('.anim-col:nth-child(3)');
+      var col3r    = col3.getBoundingClientRect();
+      var dx = (col3r.left + 12) - gr.left;                 // horizontal travel
+      var dy = (dzr.top - br.top) - (gr.top - br.top) + 16; // vertical: where inside col3
+
+      board.style.setProperty('--fly-dx', dx + 'px');
+      board.style.setProperty('--fly-dy', dy + 'px');
+
+      return { dx: dx, dy: dy, cursorOffX: gr.width * 0.55, cursorOffY: 14 };
+    }
+
+    function sleep(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
+
+    function setTransform(dx, dy, rotate, scale) {
+      flyCard.style.transform = 'translate(' + dx + 'px, ' + dy + 'px) rotate(' + rotate + 'deg) scale(' + scale + ')';
+      cursor.style.transform  = 'translate(calc(' + dx + 'px + var(--cur-ox)), calc(' + dy + 'px + var(--cur-oy)))';
+    }
+
+    function setPhase(name) {
+      board.classList.remove('is-lifting','is-dragging','is-over-target','is-dropping','is-settled');
+      if (name) board.classList.add(name);
+      if (name === 'is-dragging' || name === 'is-over-target') board.classList.add('is-over-target');
+    }
+
+    async function cycle() {
+      var pos = measure();
+      board.style.setProperty('--cur-ox', pos.cursorOffX + 'px');
+      board.style.setProperty('--cur-oy', pos.cursorOffY + 'px');
+
+      // Reset flying card
+      flyCard.style.transition = 'none';
+      cursor.style.transition  = 'none';
+      setTransform(0, 0, 0, 1);
+      flyCard.style.opacity = '0';
+      cursor.style.opacity  = '0';
+      setPhase(null);
+
+      await sleep(100);
+
+      // Fade in at source
+      flyCard.style.transition = 'opacity 0.35s ease';
+      flyCard.style.opacity = '1';
+      cursor.style.transition  = 'opacity 0.25s ease';
+
+      await sleep(600);
+
+      // Lift
+      setPhase('is-lifting');
+      flyCard.style.transition =
+        'transform 0.42s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s ease, border-color 0.25s ease, background 0.25s ease, opacity 0.3s ease';
+      cursor.style.transition  = 'transform 0.42s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease';
+      setTransform(0, -16, 2.2, 1.055);
+
+      await sleep(520);
+
+      // Start drag — show drop zone, begin glide
+      setPhase('is-dragging');
+      flyCard.style.transition =
+        'transform 1.75s cubic-bezier(0.4,0,0.25,1), box-shadow 0.35s ease, border-color 0.25s ease';
+      cursor.style.transition  = 'transform 1.75s cubic-bezier(0.4,0,0.25,1), opacity 0.2s ease';
+      setTransform(pos.dx, -16, 2.2, 1.055);
+
+      await sleep(1800);
+
+      // Drop
+      setPhase('is-dropping');
+      flyCard.style.transition =
+        'transform 0.38s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.3s ease, border-color 0.25s ease';
+      cursor.style.transition  = 'transform 0.38s cubic-bezier(0.175,0.885,0.32,1.275)';
+      setTransform(pos.dx, pos.dy, 0.4, 1.02);
+
+      await sleep(420);
+
+      // Settle
+      setPhase('is-settled');
+      flyCard.style.transition =
+        'transform 0.18s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease';
+      cursor.style.transition  = 'opacity 0.2s ease';
+      cursor.style.opacity = '0';
+      setTransform(pos.dx, pos.dy + 3, 0, 1);
+
+      await sleep(900);
+
+      // Fade out
+      flyCard.style.transition = 'opacity 0.35s ease';
+      flyCard.style.opacity = '0';
+      setPhase(null);
+
+      await sleep(600);
+    }
+
+    async function loop() {
+      while (true) {
+        await cycle();
+        await sleep(300);
+      }
+    }
+
+    loop();
+  }
+  </script>
 </body>
 </html>
