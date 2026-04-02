@@ -23,7 +23,7 @@
       --border2:  rgba(255,255,255,0.11);
       --text:     #f0efe8;
       --text2:    #706f68;
-      --text3:    #2e2e2b;
+      --text3:    #515150;
       --accent:   #c8ff47;
       --accent-rgb: 200,255,71;
       --fl:  #ff8c00;
@@ -194,10 +194,9 @@
     .hero {
       min-height: 100vh;
       padding: 120px 48px 80px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       max-width: 1280px;
       margin: 0 auto;
       position: relative;
@@ -242,7 +241,7 @@
 
     .hero-headline {
       font-family: var(--display);
-      font-size: clamp(76px, 12vw, 164px);
+      font-size: clamp(80px, 13.5vw, 182px);
       line-height: 0.92;
       letter-spacing: 0.01em;
       color: var(--text);
@@ -1308,8 +1307,7 @@
     @media (max-width: 900px) {
       nav { padding: 0 24px; }
       .nav-links { display: none; }
-      .hero { grid-template-columns: 1fr; padding: 100px 24px 64px; }
-      .hero-right { display: none; }
+      .hero { padding: 100px 24px 64px; }
       .section { padding: 80px 24px; }
       .features-inner { padding: 80px 24px; }
       .features-header { grid-template-columns: 1fr; }
@@ -1397,82 +1395,6 @@
       </div>
     </div>
 
-    <!-- 3D Board Visual -->
-    <div class="hero-right">
-      <div class="board-scene">
-        <div class="board-tilt">
-          <div class="board-glow"></div>
-
-          <!-- Col 1: Idea Dump -->
-          <div class="b-col">
-            <div class="b-col-head">
-              <div class="b-col-head-dot" style="background:#333"></div>
-              Idea Dump
-            </div>
-            <div class="b-card b-card-lift">
-              <div class="b-card-title">NEON HAZE — main</div>
-              <div class="b-card-tag" style="color:#47c8ff">mixing</div>
-              <div class="b-card-daw">ALS</div>
-            </div>
-            <div class="b-card">
-              <div class="b-card-title">808 experiment</div>
-              <div class="b-card-tag" style="color:#c8ff47">WIP</div>
-              <div class="b-card-daw">FLP</div>
-            </div>
-            <div class="b-card">
-              <div class="b-card-title">midnight loop v3</div>
-              <div class="b-card-tag" style="color:#ff8c00">trap</div>
-              <div class="b-card-daw">FLP</div>
-            </div>
-          </div>
-
-          <!-- Col 2: In Progress (active) -->
-          <div class="b-col b-col-active">
-            <div class="b-col-head" style="color:var(--accent)">
-              <div class="b-col-head-dot" style="background:var(--accent)"></div>
-              In Progress
-            </div>
-            <div class="b-card">
-              <div class="b-card-title">collab_session_03</div>
-              <div class="b-card-tag" style="color:#b847ff">collab</div>
-              <div class="b-card-daw">ALS</div>
-            </div>
-            <div class="b-card">
-              <div class="b-card-title">CARBON EP — mix</div>
-              <div class="b-card-tag" style="color:#3af0b0">mixing</div>
-              <div class="b-card-daw">ALS</div>
-            </div>
-          </div>
-
-          <!-- Col 3: Done -->
-          <div class="b-col">
-            <div class="b-col-head">
-              <div class="b-col-head-dot" style="background:#3af0b0"></div>
-              Done
-            </div>
-            <div class="b-card">
-              <div class="b-card-title">VOID — full session</div>
-              <div class="b-card-tag" style="color:#4780ff">review</div>
-              <div class="b-card-daw">PTX</div>
-            </div>
-            <div class="b-card">
-              <div class="b-card-title">summer sessions vol.1</div>
-              <div class="b-card-tag" style="color:#3af0b0">released</div>
-              <div class="b-card-daw">FLP</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MARQUEE -->
-  <div class="marquee-wrap">
-    <div class="marquee-track">
-      <!-- doubled for seamless loop -->
-      <div class="marquee-item"><span>FL Studio</span><span class="marquee-sep">·</span><span>Ableton Live</span><span class="marquee-sep">·</span><span>Pro Tools</span><span class="marquee-sep">·</span><span>Reaper</span><span class="marquee-sep">·</span>Kanban Board<span class="marquee-sep">·</span>Auto-Scan<span class="marquee-sep">·</span>Tags &amp; Notes<span class="marquee-sep">·</span>One-Click Open<span class="marquee-sep">·</span>Cloud Sync<span class="marquee-sep">·</span>Collaboration<span class="marquee-sep">·</span>Real-Time Updates<span class="marquee-sep">·</span>Custom Themes<span class="marquee-sep">·</span>Keyboard Shortcuts<span class="marquee-sep">·</span></div>
-      <div class="marquee-item"><span>FL Studio</span><span class="marquee-sep">·</span><span>Ableton Live</span><span class="marquee-sep">·</span><span>Pro Tools</span><span class="marquee-sep">·</span><span>Reaper</span><span class="marquee-sep">·</span>Kanban Board<span class="marquee-sep">·</span>Auto-Scan<span class="marquee-sep">·</span>Tags &amp; Notes<span class="marquee-sep">·</span>One-Click Open<span class="marquee-sep">·</span>Cloud Sync<span class="marquee-sep">·</span>Collaboration<span class="marquee-sep">·</span>Real-Time Updates<span class="marquee-sep">·</span>Custom Themes<span class="marquee-sep">·</span>Keyboard Shortcuts<span class="marquee-sep">·</span></div>
-    </div>
   </div>
 
   <!-- IN ACTION -->
@@ -1561,22 +1483,62 @@
             <span class="role-board-label">Producer</span>
             <span class="role-board-tag">beats</span>
           </div>
-          <div class="role-board-columns">
-            <div class="role-col-mini">
-              <div class="role-col-mini-head" style="color:var(--text3)">Raw Ideas</div>
-              <div class="role-card-mini">chord experiment</div>
-              <div class="role-card-mini">808 session v4</div>
-              <div class="role-card-mini">late night loop</div>
+          <div style="display:flex;gap:8px;padding:12px;">
+            <div class="anim-col" style="opacity:1;transform:none;transition:none;">
+              <div class="anim-col-head">
+                <div class="anim-dot" style="background:#444"></div>
+                <span>Raw Ideas</span>
+                <span class="anim-count">3</span>
+              </div>
+              <div class="anim-card">
+                <div class="anim-card-title">chord experiment</div>
+                <div class="anim-card-tag" style="color:#c8ff47">wip</div>
+                <div class="anim-card-daw">FLP</div>
+              </div>
+              <div class="anim-card">
+                <div class="anim-card-title">808 session v4</div>
+                <div class="anim-card-tag" style="color:#ff8c00">trap</div>
+                <div class="anim-card-daw">FLP</div>
+              </div>
+              <div class="anim-card">
+                <div class="anim-card-title">late night loop</div>
+                <div class="anim-card-tag" style="color:#706f68">sketch</div>
+                <div class="anim-card-daw">FLP</div>
+              </div>
             </div>
-            <div class="role-col-mini">
-              <div class="role-col-mini-head" style="color:#c8ff47">Good Ideas</div>
-              <div class="role-card-mini accent-card">NEON HAZE — v3</div>
-              <div class="role-card-mini hi">collab beat 07</div>
+            <div class="anim-col" style="opacity:1;transform:none;transition:none;">
+              <div class="anim-col-head">
+                <div class="anim-dot" style="background:var(--accent)"></div>
+                <span style="color:var(--accent)">Good Ideas</span>
+                <span class="anim-count">2</span>
+              </div>
+              <div class="anim-card">
+                <div class="anim-card-title">NEON HAZE — v3</div>
+                <div class="anim-card-tag" style="color:#47c8ff">mixing</div>
+                <div class="anim-card-daw">ALS</div>
+              </div>
+              <div class="anim-card">
+                <div class="anim-card-title">collab beat 07</div>
+                <div class="anim-card-tag" style="color:#b847ff">collab</div>
+                <div class="anim-card-daw">FLP</div>
+              </div>
             </div>
-            <div class="role-col-mini">
-              <div class="role-col-mini-head" style="color:#3af0b0">Finished Beats</div>
-              <div class="role-card-mini hi">Summer EP mix</div>
-              <div class="role-card-mini hi">CARBON — done</div>
+            <div class="anim-col" style="opacity:1;transform:none;transition:none;">
+              <div class="anim-col-head">
+                <div class="anim-dot" style="background:#3af0b0"></div>
+                <span style="color:#3af0b0">Finished Beats</span>
+                <span class="anim-count">2</span>
+              </div>
+              <div class="anim-card">
+                <div class="anim-card-title">Summer EP mix</div>
+                <div class="anim-card-tag" style="color:#3af0b0">released</div>
+                <div class="anim-card-daw">FLP</div>
+              </div>
+              <div class="anim-card">
+                <div class="anim-card-title">CARBON — done</div>
+                <div class="anim-card-tag" style="color:#3af0b0">released</div>
+                <div class="anim-card-daw">ALS</div>
+              </div>
             </div>
           </div>
         </div>
@@ -1588,22 +1550,62 @@
             <span class="role-board-label">Engineer</span>
             <span class="role-board-tag">sessions</span>
           </div>
-          <div class="role-board-columns">
-            <div class="role-col-mini">
-              <div class="role-col-mini-head" style="color:var(--text3)">Tracking</div>
-              <div class="role-card-mini">Drake — day 1</div>
-              <div class="role-card-mini">Vocals booth B</div>
-              <div class="role-card-mini">overdubs 04</div>
+          <div style="display:flex;gap:8px;padding:12px;">
+            <div class="anim-col" style="opacity:1;transform:none;transition:none;">
+              <div class="anim-col-head">
+                <div class="anim-dot" style="background:#444"></div>
+                <span>Tracking</span>
+                <span class="anim-count">3</span>
+              </div>
+              <div class="anim-card">
+                <div class="anim-card-title">Drake — day 1</div>
+                <div class="anim-card-tag" style="color:#ff8c00">live</div>
+                <div class="anim-card-daw">PTX</div>
+              </div>
+              <div class="anim-card">
+                <div class="anim-card-title">vocals booth B</div>
+                <div class="anim-card-tag" style="color:#706f68">session</div>
+                <div class="anim-card-daw">PTX</div>
+              </div>
+              <div class="anim-card">
+                <div class="anim-card-title">overdubs 04</div>
+                <div class="anim-card-tag" style="color:#706f68">pending</div>
+                <div class="anim-card-daw">ALS</div>
+              </div>
             </div>
-            <div class="role-col-mini">
-              <div class="role-col-mini-head" style="color:#47c8ff">Mixing</div>
-              <div class="role-card-mini accent-card" style="border-color:rgba(71,200,255,0.3);color:var(--text)">VOID — full mix</div>
-              <div class="role-card-mini hi">EP stems rev2</div>
+            <div class="anim-col" style="opacity:1;transform:none;transition:none;">
+              <div class="anim-col-head">
+                <div class="anim-dot" style="background:#47c8ff"></div>
+                <span style="color:#47c8ff">Mixing</span>
+                <span class="anim-count">2</span>
+              </div>
+              <div class="anim-card">
+                <div class="anim-card-title">VOID — full mix</div>
+                <div class="anim-card-tag" style="color:#47c8ff">mixing</div>
+                <div class="anim-card-daw">PTX</div>
+              </div>
+              <div class="anim-card">
+                <div class="anim-card-title">EP stems rev2</div>
+                <div class="anim-card-tag" style="color:#b847ff">review</div>
+                <div class="anim-card-daw">ALS</div>
+              </div>
             </div>
-            <div class="role-col-mini">
-              <div class="role-col-mini-head" style="color:#3af0b0">Mastering</div>
-              <div class="role-card-mini hi">album final</div>
-              <div class="role-card-mini hi">radio edit</div>
+            <div class="anim-col" style="opacity:1;transform:none;transition:none;">
+              <div class="anim-col-head">
+                <div class="anim-dot" style="background:#3af0b0"></div>
+                <span style="color:#3af0b0">Mastering</span>
+                <span class="anim-count">2</span>
+              </div>
+              <div class="anim-card">
+                <div class="anim-card-title">album final</div>
+                <div class="anim-card-tag" style="color:#3af0b0">delivered</div>
+                <div class="anim-card-daw">PTX</div>
+              </div>
+              <div class="anim-card">
+                <div class="anim-card-title">radio edit</div>
+                <div class="anim-card-tag" style="color:#3af0b0">delivered</div>
+                <div class="anim-card-daw">ALS</div>
+              </div>
             </div>
           </div>
         </div>
@@ -1615,22 +1617,62 @@
             <span class="role-board-label">Artist</span>
             <span class="role-board-tag">songs</span>
           </div>
-          <div class="role-board-columns">
-            <div class="role-col-mini">
-              <div class="role-col-mini-head" style="color:var(--text3)">Freestyles</div>
-              <div class="role-card-mini">bar experiment</div>
-              <div class="role-card-mini">hook idea #12</div>
-              <div class="role-card-mini">voice memo 3am</div>
+          <div style="display:flex;gap:8px;padding:12px;">
+            <div class="anim-col" style="opacity:1;transform:none;transition:none;">
+              <div class="anim-col-head">
+                <div class="anim-dot" style="background:#444"></div>
+                <span>Freestyles</span>
+                <span class="anim-count">3</span>
+              </div>
+              <div class="anim-card">
+                <div class="anim-card-title">bar experiment</div>
+                <div class="anim-card-tag" style="color:#c8ff47">idea</div>
+                <div class="anim-card-daw">FLP</div>
+              </div>
+              <div class="anim-card">
+                <div class="anim-card-title">hook idea #12</div>
+                <div class="anim-card-tag" style="color:#706f68">voice memo</div>
+                <div class="anim-card-daw">FLP</div>
+              </div>
+              <div class="anim-card">
+                <div class="anim-card-title">voice memo 3am</div>
+                <div class="anim-card-tag" style="color:#706f68">raw</div>
+                <div class="anim-card-daw">FLP</div>
+              </div>
             </div>
-            <div class="role-col-mini">
-              <div class="role-col-mini-head" style="color:#b847ff">Needs Mixing</div>
-              <div class="role-card-mini accent-card" style="border-color:rgba(184,71,255,0.3);color:var(--text)">BLUE — verse 1</div>
-              <div class="role-card-mini hi">collab w/ Jay</div>
+            <div class="anim-col" style="opacity:1;transform:none;transition:none;">
+              <div class="anim-col-head">
+                <div class="anim-dot" style="background:#b847ff"></div>
+                <span style="color:#b847ff">Needs Mixing</span>
+                <span class="anim-count">2</span>
+              </div>
+              <div class="anim-card">
+                <div class="anim-card-title">BLUE — verse 1</div>
+                <div class="anim-card-tag" style="color:#b847ff">mixing</div>
+                <div class="anim-card-daw">ALS</div>
+              </div>
+              <div class="anim-card">
+                <div class="anim-card-title">collab w/ Jay</div>
+                <div class="anim-card-tag" style="color:#47c8ff">collab</div>
+                <div class="anim-card-daw">FLP</div>
+              </div>
             </div>
-            <div class="role-col-mini">
-              <div class="role-col-mini-head" style="color:#3af0b0">Finished Songs</div>
-              <div class="role-card-mini hi">lead single</div>
-              <div class="role-card-mini hi">EP track 3</div>
+            <div class="anim-col" style="opacity:1;transform:none;transition:none;">
+              <div class="anim-col-head">
+                <div class="anim-dot" style="background:#3af0b0"></div>
+                <span style="color:#3af0b0">Finished Songs</span>
+                <span class="anim-count">2</span>
+              </div>
+              <div class="anim-card">
+                <div class="anim-card-title">lead single</div>
+                <div class="anim-card-tag" style="color:#3af0b0">released</div>
+                <div class="anim-card-daw">ALS</div>
+              </div>
+              <div class="anim-card">
+                <div class="anim-card-title">EP track 3</div>
+                <div class="anim-card-tag" style="color:#3af0b0">released</div>
+                <div class="anim-card-daw">FLP</div>
+              </div>
             </div>
           </div>
         </div>
