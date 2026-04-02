@@ -808,37 +808,139 @@
       line-height: 1.7;
     }
 
-    /* ── STAT BAR ────────────────────────────────────────────────────────────── */
-    .stat-bar {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: var(--border);
+    /* ── ROLE EXAMPLES ───────────────────────────────────────────────────────── */
+    .role-examples {
+      background: var(--surface);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
+      padding: 72px 48px;
     }
 
-    .stat-item {
-      padding: 48px 48px;
-      background: var(--bg);
+    .role-examples-inner {
+      max-width: 1280px;
+      margin: 0 auto;
     }
 
-    .stat-num {
-      font-family: var(--display);
-      font-size: clamp(56px, 6vw, 80px);
+    .role-examples-eyebrow {
+      font-size: 10px;
+      font-family: var(--mono);
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 36px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .role-examples-eyebrow::before {
+      content: '';
+      display: block;
+      width: 20px; height: 1px;
+      background: var(--text3);
+    }
+
+    .role-examples-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .role-board-card {
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .role-board-card:hover {
+      border-color: rgba(255,255,255,0.14);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    }
+
+    .role-board-header {
+      padding: 14px 16px 12px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .role-board-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .role-board-label {
+      font-size: 12px;
+      font-weight: 800;
       color: var(--text);
-      line-height: 0.9;
-      letter-spacing: 0.01em;
-      margin-bottom: 10px;
+      letter-spacing: 0.03em;
+      flex: 1;
     }
 
-    .stat-num span { color: var(--accent); }
+    .role-board-tag {
+      font-size: 9px;
+      font-family: var(--mono);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text3);
+      padding: 2px 7px;
+      background: var(--surface3);
+      border-radius: 4px;
+    }
 
-    .stat-label {
-      font-size: 13px;
+    .role-board-columns {
+      display: flex;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .role-col-mini {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .role-col-mini-head {
+      font-size: 8px;
+      font-family: var(--mono);
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      padding-bottom: 7px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 7px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .role-card-mini {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 6px 8px;
+      margin-bottom: 5px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text3);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .role-card-mini.hi {
       color: var(--text2);
-      font-weight: 600;
-      letter-spacing: 0.04em;
+      border-color: rgba(255,255,255,0.08);
+    }
+
+    .role-card-mini.accent-card {
+      border-color: rgba(200,255,71,0.25);
+      color: var(--text);
     }
 
     /* ── COLLAB ──────────────────────────────────────────────────────────────── */
@@ -1187,19 +1289,6 @@
       margin: 0 auto;
     }
 
-    /* ── SCROLL PROGRESS ─────────────────────────────────────────────────────── */
-    #scroll-progress {
-      position: fixed;
-      top: 0; left: 0;
-      height: 2px;
-      width: 0%;
-      background: linear-gradient(90deg, var(--accent) 0%, rgba(200,255,71,0.5) 100%);
-      z-index: 9999;
-      box-shadow: 0 0 14px rgba(200,255,71,0.65), 0 0 4px rgba(200,255,71,0.4);
-      pointer-events: none;
-      transform-origin: left;
-    }
-
     /* ── MARQUEE GRADIENT MASKS ───────────────────────────────────────────────── */
     .marquee-wrap {
       -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
@@ -1226,8 +1315,8 @@
       .features-header { grid-template-columns: 1fr; }
       .features-grid { grid-template-columns: 1fr; }
       .steps-grid { grid-template-columns: 1fr; }
-      .stat-bar { grid-template-columns: 1fr; }
-      .stat-item { padding: 32px 24px; }
+      .role-examples { padding: 56px 24px; }
+      .role-examples-grid { grid-template-columns: 1fr; gap: 12px; }
       .collab-section { padding: 0 24px 80px; }
       .collab-block { grid-template-columns: 1fr; padding: 36px 28px; gap: 40px; }
       #pricing { padding: 80px 24px; }
@@ -1246,9 +1335,6 @@
   </style>
 </head>
 <body>
-
-  <!-- Scroll progress -->
-  <div id="scroll-progress" aria-hidden="true"></div>
 
   <!-- Grain -->
   <div class="grain" aria-hidden="true"></div>
@@ -1462,19 +1548,94 @@
     </div>
   </div>
 
-  <!-- STAT BAR -->
-  <div class="stat-bar">
-    <div class="stat-item reveal">
-      <div class="stat-num">4<span>+</span></div>
-      <div class="stat-label">DAWs supported</div>
-    </div>
-    <div class="stat-item reveal" style="transition-delay:0.1s">
-      <div class="stat-num"><span>$</span>0</div>
-      <div class="stat-label">Core features, forever free</div>
-    </div>
-    <div class="stat-item reveal" style="transition-delay:0.2s">
-      <div class="stat-num">2<span>min</span></div>
-      <div class="stat-label">To get set up</div>
+  <!-- ROLE EXAMPLES -->
+  <div class="role-examples">
+    <div class="role-examples-inner">
+      <div class="role-examples-eyebrow reveal">Works for every role in the studio</div>
+      <div class="role-examples-grid">
+
+        <!-- Producer -->
+        <div class="role-board-card reveal" style="transition-delay:0s">
+          <div class="role-board-header">
+            <div class="role-board-dot" style="background:#c8ff47"></div>
+            <span class="role-board-label">Producer</span>
+            <span class="role-board-tag">beats</span>
+          </div>
+          <div class="role-board-columns">
+            <div class="role-col-mini">
+              <div class="role-col-mini-head" style="color:var(--text3)">Raw Ideas</div>
+              <div class="role-card-mini">chord experiment</div>
+              <div class="role-card-mini">808 session v4</div>
+              <div class="role-card-mini">late night loop</div>
+            </div>
+            <div class="role-col-mini">
+              <div class="role-col-mini-head" style="color:#c8ff47">Good Ideas</div>
+              <div class="role-card-mini accent-card">NEON HAZE — v3</div>
+              <div class="role-card-mini hi">collab beat 07</div>
+            </div>
+            <div class="role-col-mini">
+              <div class="role-col-mini-head" style="color:#3af0b0">Finished Beats</div>
+              <div class="role-card-mini hi">Summer EP mix</div>
+              <div class="role-card-mini hi">CARBON — done</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Engineer -->
+        <div class="role-board-card reveal" style="transition-delay:0.08s">
+          <div class="role-board-header">
+            <div class="role-board-dot" style="background:#47c8ff"></div>
+            <span class="role-board-label">Engineer</span>
+            <span class="role-board-tag">sessions</span>
+          </div>
+          <div class="role-board-columns">
+            <div class="role-col-mini">
+              <div class="role-col-mini-head" style="color:var(--text3)">Tracking</div>
+              <div class="role-card-mini">Drake — day 1</div>
+              <div class="role-card-mini">Vocals booth B</div>
+              <div class="role-card-mini">overdubs 04</div>
+            </div>
+            <div class="role-col-mini">
+              <div class="role-col-mini-head" style="color:#47c8ff">Mixing</div>
+              <div class="role-card-mini accent-card" style="border-color:rgba(71,200,255,0.3);color:var(--text)">VOID — full mix</div>
+              <div class="role-card-mini hi">EP stems rev2</div>
+            </div>
+            <div class="role-col-mini">
+              <div class="role-col-mini-head" style="color:#3af0b0">Mastering</div>
+              <div class="role-card-mini hi">album final</div>
+              <div class="role-card-mini hi">radio edit</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Artist -->
+        <div class="role-board-card reveal" style="transition-delay:0.16s">
+          <div class="role-board-header">
+            <div class="role-board-dot" style="background:#b847ff"></div>
+            <span class="role-board-label">Artist</span>
+            <span class="role-board-tag">songs</span>
+          </div>
+          <div class="role-board-columns">
+            <div class="role-col-mini">
+              <div class="role-col-mini-head" style="color:var(--text3)">Freestyles</div>
+              <div class="role-card-mini">bar experiment</div>
+              <div class="role-card-mini">hook idea #12</div>
+              <div class="role-card-mini">voice memo 3am</div>
+            </div>
+            <div class="role-col-mini">
+              <div class="role-col-mini-head" style="color:#b847ff">Needs Mixing</div>
+              <div class="role-card-mini accent-card" style="border-color:rgba(184,71,255,0.3);color:var(--text)">BLUE — verse 1</div>
+              <div class="role-card-mini hi">collab w/ Jay</div>
+            </div>
+            <div class="role-col-mini">
+              <div class="role-col-mini-head" style="color:#3af0b0">Finished Songs</div>
+              <div class="role-card-mini hi">lead single</div>
+              <div class="role-card-mini hi">EP track 3</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -1869,16 +2030,6 @@
     loop();
   }
 
-  // ── Scroll progress bar ───────────────────────────────────────────────────
-  (function() {
-    var bar = document.getElementById('scroll-progress');
-    if (!bar) return;
-    window.addEventListener('scroll', function() {
-      var docH = document.documentElement.scrollHeight - window.innerHeight;
-      bar.style.width = (docH > 0 ? window.scrollY / docH * 100 : 0) + '%';
-    }, { passive: true });
-  })();
-
   // ── Hero scroll parallax ──────────────────────────────────────────────────
   (function() {
     var heroLeft  = document.querySelector('.hero-left');
@@ -1991,45 +2142,6 @@
         card.style.transform = '';
       });
     });
-  })();
-
-  // ── Stat counter animation ────────────────────────────────────────────────
-  (function() {
-    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
-
-    function countUp(el, toVal, dur) {
-      var span = el.querySelector('span');
-      var spanHTML = span ? span.outerHTML : '';
-      var t0 = null;
-      (function step(ts) {
-        if (!t0) t0 = ts;
-        var p = Math.min((ts - t0) / dur, 1);
-        el.innerHTML = Math.round(easeOut(p) * toVal) + spanHTML;
-        if (p < 1) requestAnimationFrame(step);
-      })(performance.now());
-    }
-
-    var data = [
-      { nth: 1, to: 4,  dur: 1100 },
-      { nth: 3, to: 2,  dur:  900 },
-    ];
-
-    var io = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (!e.isIntersecting) return;
-        var statItems = document.querySelectorAll('.stat-item');
-        statItems.forEach(function(item, idx) {
-          data.forEach(function(d) {
-            if (d.nth - 1 === idx && e.target === item) {
-              countUp(item.querySelector('.stat-num'), d.to, d.dur);
-            }
-          });
-        });
-        io.unobserve(e.target);
-      });
-    }, { threshold: 0.6 });
-
-    document.querySelectorAll('.stat-item').forEach(function(el) { io.observe(el); });
   })();
 
   // ── Smooth anchor scroll with offset for fixed nav ─────────────────────────
