@@ -628,6 +628,100 @@
       color: var(--text3);
     }
 
+    /* ── DOWNLOAD SECTION ───────────────────────────────────────────────── */
+    .download-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .install-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .install-step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .install-step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #0a0a0b;
+      font-size: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .install-step-body strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .install-step-body span {
+      font-size: 12px;
+      color: var(--text3);
+      line-height: 1.6;
+    }
+
+    .security-box {
+      background: rgba(255, 160, 0, 0.06);
+      border: 1px solid rgba(255, 160, 0, 0.3);
+      border-radius: 12px;
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .security-box-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #ffab00;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .security-box p {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.7;
+    }
+
+    .virustotal-note {
+      margin-top: 16px;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border2);
+      border-radius: 10px;
+      font-size: 12px;
+      color: var(--text3);
+      line-height: 1.6;
+    }
+
+    .virustotal-note a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .download-grid { grid-template-columns: 1fr; }
+    }
+
     /* ── DIVIDER ─────────────────────────────────────────────────────────── */
     .divider {
       width: 100%;
@@ -661,6 +755,7 @@
       <li><a href="#features">Features</a></li>
       <li><a href="#how-it-works">How it works</a></li>
       <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#download">Download</a></li>
     </ul>
     <a href="https://github.com/gnznaki/TrackingMyFlowDog/releases/latest" class="btn btn-primary" target="_blank" rel="noopener">
       Download — Free
@@ -893,7 +988,7 @@
         <div class="section-label">Collaboration</div>
         <div class="section-title">Built for the studio, not just the bedroom.</div>
         <div class="section-sub">Share a board with your engineer, your A&R, or your co-producer. Set roles so the right people can edit, and viewers can see without breaking anything.</div>
-        <a href="#pricing" class="btn btn-primary">Get Premium</a>
+        <a href="#download" class="btn btn-primary">Download Free</a>
       </div>
       <div class="collab-visual">
         <div class="member-row">
@@ -994,8 +1089,91 @@
             Multi-device state sync
           </li>
         </ul>
-        <a href="https://github.com/gnznaki/TrackingMyFlowDog/releases/latest" class="btn btn-primary" style="width:100%;justify-content:center" target="_blank" rel="noopener">Download &amp; Upgrade In-App</a>
-        <div style="font-size:11px;color:var(--text3);text-align:center;margin-top:10px">Secured by Stripe · No hidden fees</div>
+        <div style="width:100%;padding:13px 0;background:rgba(200,255,71,0.07);border:1px solid rgba(200,255,71,0.2);border-radius:10px;text-align:center;font-size:13px;font-weight:800;color:rgba(200,255,71,0.5);letter-spacing:0.06em">COMING SOON</div>
+        <div style="font-size:11px;color:var(--text3);text-align:center;margin-top:10px">Free forever for core features · Premium unlocks collaboration</div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- DOWNLOAD -->
+  <section id="download">
+    <div class="section-label">Download</div>
+    <div class="section-title">Get TrackFlow — Free</div>
+    <div class="section-sub">Native Windows desktop app. No account required to get started.</div>
+
+    <div style="margin-top:36px;text-align:center">
+      <a href="https://github.com/gnznaki/TrackingMyFlowDog/releases/latest" class="btn btn-primary" target="_blank" rel="noopener" style="font-size:15px;padding:14px 36px">
+        Download for Windows — Free
+      </a>
+      <div style="font-size:12px;color:var(--text3);margin-top:12px">Windows 10 / 11 · 64-bit · No subscription</div>
+    </div>
+
+    <div class="download-grid">
+
+      <!-- Install steps -->
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--text2);margin-bottom:20px;text-transform:uppercase;letter-spacing:0.06em">Installation guide</div>
+        <div class="install-steps">
+          <div class="install-step">
+            <div class="install-step-num">1</div>
+            <div class="install-step-body">
+              <strong>Download the installer</strong>
+              <span>Click the button above. GitHub will download a <code style="font-family:Space Mono;background:rgba(255,255,255,0.06);padding:1px 5px;border-radius:4px">.exe</code> setup file directly to your computer.</span>
+            </div>
+          </div>
+          <div class="install-step">
+            <div class="install-step-num">2</div>
+            <div class="install-step-body">
+              <strong>Run the installer</strong>
+              <span>Double-click the downloaded file. Windows may show a SmartScreen security prompt — this is expected (see the note on the right).</span>
+            </div>
+          </div>
+          <div class="install-step">
+            <div class="install-step-num">3</div>
+            <div class="install-step-body">
+              <strong>Click "More info" → "Run anyway"</strong>
+              <span>On the SmartScreen popup, click <strong style="color:var(--text)">"More info"</strong> at the bottom left, then click <strong style="color:var(--text)">"Run anyway"</strong>. TrackFlow will install normally.</span>
+            </div>
+          </div>
+          <div class="install-step">
+            <div class="install-step-num">4</div>
+            <div class="install-step-body">
+              <strong>You're in</strong>
+              <span>TrackFlow launches automatically after install. No login required — just point it at your project folders and start organizing.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Security info -->
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--text2);margin-bottom:20px;text-transform:uppercase;letter-spacing:0.06em">Security &amp; trust</div>
+
+        <div class="security-box">
+          <div class="security-box-title">
+            ⚠ You will always see a Windows security warning
+          </div>
+          <p>
+            This is <strong style="color:var(--text)">completely normal</strong> and expected. TrackFlow is not yet signed with a paid Windows code-signing certificate. Microsoft SmartScreen warns about any app that hasn't built up a reputation through a certificate authority — including legitimate, safe software.
+          </p>
+          <p>
+            This <strong style="color:var(--text)">does not mean the app is dangerous</strong>. It means it hasn't paid Microsoft for a certificate yet. Clicking "More info" → "Run anyway" is the correct action.
+          </p>
+        </div>
+
+        <div class="virustotal-note">
+          <strong style="color:var(--text2);display:block;margin-bottom:6px">Every release is scanned before publishing</strong>
+          We run each build through <a href="https://www.virustotal.com" target="_blank" rel="noopener">VirusTotal</a> before it's released. You can independently verify any release by uploading the installer to VirusTotal yourself — it will confirm the file is clean.
+        </div>
+
+        <div style="margin-top:14px;font-size:11px;color:var(--text3);line-height:1.7">
+          TrackFlow is open source. You can review the full source code on
+          <a href="https://github.com/gnznaki/TrackingMyFlowDog" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">GitHub</a>
+          at any time.
+        </div>
       </div>
 
     </div>
