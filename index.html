@@ -1449,9 +1449,11 @@
         </div>
 
         <div class="virustotal-note">
-          <strong style="color:var(--text2);display:block;margin-bottom:6px">Every release is independently verified</strong>
-          Each build is scanned through VirusTotal before publishing. <a href="https://www.virustotal.com/gui/file/VIRUSTOTAL_HASH_PLACEHOLDER" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700">View the v1.2.1 scan results →</a><br />
-          <span style="font-size:11px;color:var(--text3);margin-top:5px;display:block">0 detections across 70+ antivirus engines. You can also verify yourself by uploading the installer directly to <a href="https://www.virustotal.com" target="_blank" rel="noopener" style="color:var(--text2)">virustotal.com</a>.</span>
+          <strong style="color:var(--text2);display:block;margin-bottom:8px">Every release is scanned before publishing</strong>
+          The v1.2.1 VirusTotal scan shows <strong style="color:var(--text)">68 of 71 engines clean</strong>. <a href="https://www.virustotal.com/gui/file/VIRUSTOTAL_HASH_PLACEHOLDER" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700">View the full results →</a>
+          <p style="margin:10px 0 0;font-size:11px;color:var(--text3);line-height:1.7">
+            The 3 flagging engines (Sophos, SecureAge, Arctic Wolf) use heuristic ML detection only — none match a known malware signature. This is a documented false positive pattern for newly compiled, unsigned apps. Every major engine — Windows Defender, Kaspersky, ESET, Bitdefender, Avast, Norton, Malwarebytes — reports <strong style="color:var(--text2)">clean</strong>.
+          </p>
         </div>
 
         <div style="margin-top:14px;font-size:11px;color:var(--text3);line-height:1.7">
