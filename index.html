@@ -10,24 +10,29 @@
   <meta property="og:type" content="website" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Mono&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:       #0a0a0b;
-      --surface:  #111114;
-      --surface2: #18181c;
-      --border:   rgba(255,255,255,0.07);
-      --border2:  rgba(255,255,255,0.12);
-      --text:     #f0f0f0;
-      --text2:    #a0a0a8;
-      --text3:    #55555f;
+      --bg:       #080808;
+      --surface:  #0e0e0e;
+      --surface2: #141414;
+      --surface3: #1a1a1a;
+      --border:   rgba(255,255,255,0.055);
+      --border2:  rgba(255,255,255,0.11);
+      --text:     #f0efe8;
+      --text2:    #706f68;
+      --text3:    #2e2e2b;
       --accent:   #c8ff47;
-      --fl:       #ff8c00;
-      --ab:       #47c8ff;
-      --pt:       #4780ff;
-      --rp:       #d44a3a;
+      --accent-rgb: 200,255,71;
+      --fl:  #ff8c00;
+      --ab:  #47c8ff;
+      --pt:  #4780ff;
+      --rp:  #d44a3a;
+      --display: "Bebas Neue", sans-serif;
+      --body: "Syne", sans-serif;
+      --mono: "Space Mono", monospace;
     }
 
     html { scroll-behavior: smooth; }
@@ -35,55 +40,85 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: "Syne", sans-serif;
+      font-family: var(--body);
       line-height: 1.6;
-      min-height: 100vh;
       overflow-x: hidden;
     }
 
-    /* ── NAV ─────────────────────────────────────────────────────────────── */
+    /* ── GRAIN OVERLAY ──────────────────────────────────────────────────────── */
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9000;
+      opacity: 0.028;
+      background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='300' height='300' filter='url(%23n)'/></svg>");
+      background-repeat: repeat;
+      background-size: 200px;
+    }
+
+    /* ── NAV ────────────────────────────────────────────────────────────────── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
+      z-index: 500;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 40px;
-      height: 60px;
-      background: rgba(10,10,11,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      padding: 0 48px;
+      height: 64px;
+      transition: background 0.3s, border-color 0.3s;
+      border-bottom: 1px solid transparent;
+    }
+
+    nav.scrolled {
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-color: var(--border);
     }
 
     .nav-logo {
       display: flex;
       align-items: center;
       gap: 10px;
-      font-size: 16px;
-      font-weight: 800;
-      color: var(--text);
       text-decoration: none;
     }
 
-    .nav-logo-dot {
-      width: 8px; height: 8px;
+    .nav-logo-mark {
+      width: 26px; height: 26px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3px;
+      align-items: flex-end;
+    }
+
+    .nav-logo-bar {
       border-radius: 2px;
       background: var(--accent);
+    }
+
+    .nav-logo-name {
+      font-family: var(--display);
+      font-size: 20px;
+      letter-spacing: 0.06em;
+      color: var(--text);
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 32px;
+      gap: 36px;
       list-style: none;
     }
 
     .nav-links a {
-      font-size: 13px;
-      font-weight: 600;
+      font-size: 12px;
+      font-weight: 700;
       color: var(--text2);
       text-decoration: none;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
       transition: color 0.15s;
     }
 
@@ -93,96 +128,140 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 9px 20px;
-      border-radius: 8px;
-      font-family: "Syne", sans-serif;
-      font-size: 13px;
+      border-radius: 6px;
+      font-family: var(--body);
       font-weight: 700;
       cursor: pointer;
       text-decoration: none;
       transition: opacity 0.15s, transform 0.12s;
       border: none;
+      white-space: nowrap;
     }
 
-    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn:hover { opacity: 0.85; transform: translateY(-1px); }
     .btn:active { transform: translateY(0); }
 
     .btn-primary {
       background: var(--accent);
-      color: #0a0a0b;
+      color: #080808;
+      padding: 10px 22px;
+      font-size: 13px;
     }
 
     .btn-ghost {
       background: transparent;
       color: var(--text2);
       border: 1px solid var(--border2);
+      padding: 10px 22px;
+      font-size: 13px;
     }
 
-    .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.25); }
+    .btn-ghost:hover { color: var(--text); border-color: rgba(255,255,255,0.22); }
 
-    /* ── HERO ────────────────────────────────────────────────────────────── */
+    .btn-xl {
+      padding: 15px 36px;
+      font-size: 15px;
+      border-radius: 8px;
+    }
+
+    /* ── SCROLL REVEAL SYSTEM ────────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(48px);
+      transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-56px);
+      transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(56px);
+      transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
+    }
+    .revealed {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    /* ── HERO ────────────────────────────────────────────────────────────────── */
     .hero {
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      padding: 120px 48px 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 120px 24px 80px;
+      max-width: 1280px;
+      margin: 0 auto;
       position: relative;
     }
 
-    .hero::before {
-      content: "";
+    .hero-glow {
       position: absolute;
-      top: 0; left: 50%;
-      transform: translateX(-50%);
-      width: 700px; height: 600px;
-      background: radial-gradient(ellipse at 50% 0%, rgba(200,255,71,0.08) 0%, transparent 70%);
+      top: -200px; left: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(ellipse, rgba(200,255,71,0.055) 0%, transparent 65%);
       pointer-events: none;
     }
 
-    .hero-badge {
+    .hero-left { position: relative; z-index: 2; }
+
+    .hero-eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      padding: 5px 14px;
-      background: rgba(200,255,71,0.08);
-      border: 1px solid rgba(200,255,71,0.2);
-      border-radius: 100px;
-      font-size: 11px;
+      gap: 8px;
+      font-size: 10px;
+      font-family: var(--mono);
       font-weight: 700;
-      color: var(--accent);
-      letter-spacing: 0.06em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
+      color: var(--accent);
       margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeSlideUp 0.7s 0.1s cubic-bezier(0.16,1,0.3,1) forwards;
     }
 
-    .hero-badge-dot {
-      width: 5px; height: 5px;
+    .hero-eyebrow-dot {
+      width: 6px; height: 6px;
       border-radius: 50%;
       background: var(--accent);
+      animation: pulse 2s ease-in-out infinite;
     }
 
-    .hero h1 {
-      font-size: clamp(40px, 7vw, 72px);
-      font-weight: 800;
-      line-height: 1.08;
-      letter-spacing: -0.02em;
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .hero-headline {
+      font-family: var(--display);
+      font-size: clamp(76px, 12vw, 164px);
+      line-height: 0.92;
+      letter-spacing: 0.01em;
       color: var(--text);
-      max-width: 780px;
-      margin-bottom: 22px;
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeSlideUp 0.8s 0.2s cubic-bezier(0.16,1,0.3,1) forwards;
     }
 
-    .hero h1 span { color: var(--accent); }
+    .hero-headline .line-accent { color: var(--accent); display: block; }
 
-    .hero p {
-      font-size: clamp(15px, 2vw, 18px);
+    .hero-sub {
+      font-size: 16px;
       color: var(--text2);
-      max-width: 520px;
-      margin: 0 auto 40px;
-      line-height: 1.7;
+      max-width: 440px;
+      line-height: 1.75;
+      margin-bottom: 40px;
       font-weight: 400;
+      opacity: 0;
+      animation: fadeSlideUp 0.8s 0.35s cubic-bezier(0.16,1,0.3,1) forwards;
     }
 
     .hero-ctas {
@@ -190,549 +269,245 @@
       align-items: center;
       gap: 12px;
       flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 64px;
+      margin-bottom: 48px;
+      opacity: 0;
+      animation: fadeSlideUp 0.8s 0.45s cubic-bezier(0.16,1,0.3,1) forwards;
     }
-
-    .hero-ctas .btn { padding: 12px 28px; font-size: 14px; }
 
     .daw-badges {
       display: flex;
       align-items: center;
-      gap: 10px;
-      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeSlideUp 0.8s 0.55s cubic-bezier(0.16,1,0.3,1) forwards;
     }
 
     .daw-badge {
       display: flex;
       align-items: center;
       gap: 6px;
-      padding: 4px 12px;
+      padding: 4px 10px;
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 700;
-      font-family: "Space Mono", monospace;
-    }
-
-    .daw-dot {
-      width: 5px; height: 5px;
-      border-radius: 50%;
-    }
-
-    /* ── BOARD PREVIEW ───────────────────────────────────────────────────── */
-    .preview-wrap {
-      width: 100%;
-      max-width: 960px;
-      margin: 72px auto 0;
-      padding: 0 24px;
-    }
-
-    .board-preview {
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      border-radius: 16px;
-      padding: 20px;
-      display: flex;
-      gap: 14px;
-      overflow: hidden;
-      box-shadow: 0 40px 120px rgba(0,0,0,0.6), 0 0 0 1px rgba(200,255,71,0.06);
-    }
-
-    .col-preview {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .col-header {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 10px;
-      margin-bottom: 10px;
-    }
-
-    .col-dot {
-      width: 8px; height: 8px;
-      border-radius: 2px;
-      flex-shrink: 0;
-    }
-
-    .col-title {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--text2);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .col-count {
-      margin-left: auto;
-      font-size: 10px;
-      color: var(--text3);
-      font-family: "Space Mono", monospace;
-    }
-
-    .card-preview {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 12px;
-      margin-bottom: 8px;
-    }
-
-    .card-title {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 5px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .card-path {
-      font-size: 10px;
-      font-family: "Space Mono", monospace;
-      color: var(--text3);
-      margin-bottom: 8px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .card-tag {
-      font-size: 9px;
-      font-weight: 700;
-      padding: 2px 7px;
       border-radius: 4px;
-    }
-
-    .card-daw {
-      font-size: 9px;
-      font-family: "Space Mono", monospace;
-      font-weight: 700;
-    }
-
-    /* ── SECTIONS ────────────────────────────────────────────────────────── */
-    section {
-      padding: 100px 24px;
-      max-width: 1080px;
-      margin: 0 auto;
-    }
-
-    .section-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 16px;
-    }
-
-    .section-title {
-      font-size: clamp(28px, 4vw, 42px);
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      max-width: 560px;
-      margin-bottom: 18px;
-    }
-
-    .section-sub {
-      font-size: 16px;
-      color: var(--text2);
-      max-width: 460px;
-      line-height: 1.7;
-      margin-bottom: 56px;
-    }
-
-    /* ── FEATURES GRID ───────────────────────────────────────────────────── */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-    }
-
-    .feature-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      transition: border-color 0.2s;
-    }
-
-    .feature-card:hover { border-color: var(--border2); }
-
-    .feature-icon {
-      width: 36px; height: 36px;
-      border-radius: 8px;
-      background: rgba(200,255,71,0.08);
-      border: 1px solid rgba(200,255,71,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-    }
-
-    .feature-icon svg { stroke: var(--accent); }
-
-    .feature-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-
-    .feature-desc {
-      font-size: 13px;
-      color: var(--text2);
-      line-height: 1.65;
-    }
-
-    /* ── HOW IT WORKS ────────────────────────────────────────────────────── */
-    .steps {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-
-    .step {
-      display: flex;
-      gap: 28px;
-      align-items: flex-start;
-      padding: 32px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .step:last-child { border-bottom: none; }
-
-    .step-num {
-      width: 36px; height: 36px;
-      border-radius: 8px;
-      background: var(--surface2);
-      border: 1px solid var(--border2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--accent);
-      flex-shrink: 0;
-      font-family: "Space Mono", monospace;
-    }
-
-    .step-body { flex: 1; }
-
-    .step-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-
-    .step-desc {
-      font-size: 14px;
-      color: var(--text2);
-      line-height: 1.65;
-    }
-
-    /* ── COLLAB ──────────────────────────────────────────────────────────── */
-    .collab-block {
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      border-radius: 16px;
-      padding: 48px;
-      display: flex;
-      gap: 64px;
-      align-items: center;
-    }
-
-    .collab-text { flex: 1; }
-    .collab-text .section-title { margin-bottom: 14px; }
-    .collab-text .section-sub { margin-bottom: 32px; }
-
-    .collab-visual {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .member-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-    }
-
-    .member-avatar {
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .member-name {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text);
-      flex: 1;
-    }
-
-    .member-role {
       font-size: 10px;
       font-weight: 700;
-      padding: 2px 9px;
-      border-radius: 6px;
+      font-family: var(--mono);
+      letter-spacing: 0.04em;
     }
 
-    /* ── PRICING ─────────────────────────────────────────────────────────── */
-    .pricing-wrap {
+    .daw-dot { width: 5px; height: 5px; border-radius: 50%; }
+
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── 3D BOARD VISUAL ─────────────────────────────────────────────────────── */
+    .hero-right {
+      position: relative;
       display: flex;
-      gap: 16px;
-      max-width: 760px;
-      margin: 0 auto;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeIn 1.1s 0.5s cubic-bezier(0.16,1,0.3,1) forwards;
     }
 
-    .pricing-card {
-      flex: 1;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 32px;
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
     }
 
-    .pricing-card.featured {
-      border-color: rgba(200,255,71,0.35);
-      background: linear-gradient(160deg, rgba(200,255,71,0.04) 0%, var(--surface) 100%);
+    .board-scene {
+      perspective: 1100px;
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .board-tilt {
+      display: flex;
+      gap: 12px;
+      transform: rotateX(14deg) rotateY(-22deg) rotateZ(3deg);
+      transform-style: preserve-3d;
+      animation: boardFloat 7s ease-in-out infinite;
       position: relative;
     }
 
-    .pricing-badge {
-      position: absolute;
-      top: -12px; left: 50%;
-      transform: translateX(-50%);
-      background: var(--accent);
-      color: #0a0a0b;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
+    @keyframes boardFloat {
+      0%, 100% { transform: rotateX(14deg) rotateY(-22deg) rotateZ(3deg) translateY(0); }
+      50%       { transform: rotateX(11deg) rotateY(-19deg) rotateZ(2deg) translateY(-16px); }
+    }
+
+    .b-col {
+      flex: 1;
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 10px;
+      padding: 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: 0 28px 60px rgba(0,0,0,0.7);
+    }
+
+    .b-col.b-col-active {
+      border-color: rgba(200,255,71,0.3);
+      box-shadow: 0 28px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(200,255,71,0.12), 0 0 40px rgba(200,255,71,0.06);
+    }
+
+    .b-col-head {
+      font-size: 8px;
+      font-family: var(--mono);
+      font-weight: 700;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      padding: 4px 14px;
-      border-radius: 100px;
+      color: var(--text2);
+      padding-bottom: 9px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 2px;
+    }
+
+    .b-col-head-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+    .b-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px 10px 9px;
+    }
+
+    .b-card.b-card-lift {
+      background: var(--surface3);
+      border-color: rgba(200,255,71,0.35);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.8), 0 0 0 1px rgba(200,255,71,0.2);
+      transform: translateZ(20px) translateY(-4px) rotate(1.5deg);
+      animation: cardLift 7s ease-in-out infinite;
+    }
+
+    @keyframes cardLift {
+      0%, 100% { transform: translateZ(20px) translateY(-4px) rotate(1.5deg); }
+      50%       { transform: translateZ(28px) translateY(-10px) rotate(1deg); }
+    }
+
+    .b-card-title { font-size: 10px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .b-card-tag   { font-size: 8px; font-weight: 700; font-family: var(--mono); }
+    .b-card-daw   { font-size: 8px; color: var(--text3); font-family: var(--mono); margin-top: 3px; }
+
+    .board-glow {
+      position: absolute;
+      inset: -60px;
+      background: radial-gradient(ellipse at 50% 60%, rgba(200,255,71,0.07) 0%, transparent 65%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* ── MARQUEE ─────────────────────────────────────────────────────────────── */
+    .marquee-wrap {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      overflow: hidden;
+      padding: 14px 0;
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      width: max-content;
+      animation: marqueeScroll 28s linear infinite;
+    }
+
+    .marquee-track:hover { animation-play-state: paused; }
+
+    @keyframes marqueeScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 0 28px;
+      font-size: 11px;
+      font-family: var(--mono);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text3);
       white-space: nowrap;
     }
 
-    .pricing-name {
-      font-size: 13px;
+    .marquee-item span { color: var(--accent); }
+    .marquee-sep { color: var(--text3); }
+
+    /* ── SECTIONS BASE ──────────────────────────────────────────────────────── */
+    .section {
+      padding: 120px 48px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 10px;
+      font-family: var(--mono);
       font-weight: 700;
-      color: var(--text2);
-      margin-bottom: 12px;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
     }
 
-    .pricing-price {
-      font-size: 42px;
-      font-weight: 800;
+    .section-tag::before {
+      content: '';
+      display: block;
+      width: 20px; height: 1px;
+      background: var(--accent);
+    }
+
+    .display-heading {
+      font-family: var(--display);
+      font-size: clamp(48px, 6.5vw, 84px);
+      line-height: 0.95;
+      letter-spacing: 0.01em;
       color: var(--text);
-      line-height: 1;
-      margin-bottom: 4px;
-      letter-spacing: -0.02em;
     }
 
-    .pricing-price sup {
-      font-size: 22px;
-      font-weight: 700;
-      vertical-align: super;
-      margin-right: 2px;
+    .display-heading .accent { color: var(--accent); }
+
+    /* ── IN ACTION ──────────────────────────────────────────────────────────── */
+    #in-action {
+      padding: 120px 48px;
+      max-width: 1280px;
+      margin: 0 auto;
     }
 
-    .pricing-period {
-      font-size: 12px;
-      color: var(--text3);
-      margin-bottom: 28px;
-    }
-
-    .pricing-features {
-      list-style: none;
+    .in-action-header {
       display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 28px;
-    }
-
-    .pricing-features li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 13px;
-      color: var(--text2);
-      line-height: 1.5;
-    }
-
-    .check {
-      width: 16px; height: 16px;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .check-accent { stroke: var(--accent); }
-    .check-muted  { stroke: var(--text3); }
-
-    /* ── FOOTER ──────────────────────────────────────────────────────────── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 40px 40px;
-      display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-
-    .footer-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .footer-links {
-      display: flex;
-      align-items: center;
+      margin-bottom: 64px;
       gap: 24px;
       flex-wrap: wrap;
     }
 
-    .footer-links a {
-      font-size: 12px;
-      color: var(--text3);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-
-    .footer-links a:hover { color: var(--text2); }
-
-    .footer-copy {
-      font-size: 12px;
-      color: var(--text3);
-    }
-
-    /* ── DOWNLOAD SECTION ───────────────────────────────────────────────── */
-    .download-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      margin-top: 48px;
-    }
-
-    .install-steps {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    .install-step {
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-    }
-
-    .install-step-num {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: var(--accent);
-      color: #0a0a0b;
-      font-size: 12px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .install-step-body strong {
-      display: block;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .install-step-body span {
-      font-size: 12px;
-      color: var(--text3);
-      line-height: 1.6;
-    }
-
-    .security-box {
-      background: rgba(255, 160, 0, 0.06);
-      border: 1px solid rgba(255, 160, 0, 0.3);
-      border-radius: 12px;
-      padding: 20px 22px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .security-box-title {
-      font-size: 13px;
-      font-weight: 800;
-      color: #ffab00;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .security-box p {
-      font-size: 12px;
+    .in-action-sub {
+      font-size: 15px;
       color: var(--text2);
+      max-width: 340px;
       line-height: 1.7;
+      padding-bottom: 6px;
     }
 
-    .virustotal-note {
-      margin-top: 16px;
-      padding: 14px 18px;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border2);
-      border-radius: 10px;
-      font-size: 12px;
-      color: var(--text3);
-      line-height: 1.6;
-    }
-
-    .virustotal-note a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-
-    @media (max-width: 768px) {
-      .download-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ── BOARD DRAG ANIMATION ───────────────────────────────────────────── */
-    .anim-section {
-      padding: 80px 24px;
-      max-width: 1080px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
+    /* Anim board wrapper */
     .anim-board-outer {
-      margin-top: 52px;
       display: flex;
       justify-content: center;
     }
@@ -741,7 +516,7 @@
       position: relative;
       display: flex;
       gap: 14px;
-      max-width: 700px;
+      max-width: 740px;
       width: 100%;
     }
 
@@ -755,8 +530,6 @@
       flex-direction: column;
       gap: 8px;
       min-width: 0;
-
-      /* scroll-enter */
       opacity: 0;
       transform: translateY(28px);
       transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.35s ease, background 0.35s ease;
@@ -791,6 +564,7 @@
       border: 1px solid var(--border);
       border-radius: 10px;
       padding: 1px 7px;
+      font-family: var(--mono);
     }
 
     .anim-card {
@@ -803,9 +577,8 @@
 
     .anim-card-title { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 5px; }
     .anim-card-tag   { font-size: 10px; font-weight: 700; }
-    .anim-card-daw   { font-size: 9px; font-weight: 600; font-family: 'Space Mono', monospace; margin-top: 4px; color: var(--text3); }
+    .anim-card-daw   { font-size: 9px; font-weight: 600; font-family: var(--mono); margin-top: 4px; color: var(--text3); }
 
-    /* Ghost slot in col1 when card is flying */
     .anim-ghost {
       border-style: dashed;
       border-color: transparent;
@@ -818,7 +591,6 @@
     .anim-board.is-lifting  .anim-ghost,
     .anim-board.is-dragging .anim-ghost { opacity: 0.45; border-color: rgba(200,255,71,0.2); }
 
-    /* Drop zone indicator in col3 */
     .anim-drop-zone {
       height: 0;
       overflow: hidden;
@@ -834,13 +606,11 @@
       background: rgba(200,255,71,0.06);
     }
 
-    /* Col3 glow on drag-over */
     .anim-board.is-over-target .anim-col:nth-child(3) {
       border-color: rgba(200,255,71,0.3);
       background: linear-gradient(180deg, rgba(200,255,71,0.03) 0%, var(--surface) 80%);
     }
 
-    /* The flying card — absolutely positioned, driven by JS */
     .anim-card-flying {
       position: absolute;
       z-index: 20;
@@ -852,7 +622,7 @@
       padding: 11px 11px 10px;
       pointer-events: none;
       transition:
-        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.4s cubic-bezier(0.4,0,0.2,1),
         box-shadow 0.35s ease,
         border-color 0.25s ease,
         opacity 0.3s ease;
@@ -860,7 +630,7 @@
     }
 
     .anim-board.is-lifting .anim-card-flying {
-      transform: translate(0, -16px) rotate(2.2deg) scale(1.055) !important;
+      transform: translate(0,-16px) rotate(2.2deg) scale(1.055) !important;
       box-shadow: 0 22px 60px rgba(0,0,0,0.75), 0 0 0 1.5px rgba(200,255,71,0.5);
       border-color: rgba(200,255,71,0.45);
       background: var(--surface);
@@ -870,33 +640,22 @@
       box-shadow: 0 22px 60px rgba(0,0,0,0.75), 0 0 0 1.5px rgba(200,255,71,0.5);
       border-color: rgba(200,255,71,0.45);
       background: var(--surface);
-      transition:
-        transform 1.7s cubic-bezier(0.4, 0, 0.25, 1),
-        box-shadow 0.35s ease,
-        border-color 0.25s ease;
+      transition: transform 1.7s cubic-bezier(0.4,0,0.25,1), box-shadow 0.35s ease, border-color 0.25s ease;
     }
 
     .anim-board.is-dropping .anim-card-flying {
       box-shadow: 0 6px 20px rgba(0,0,0,0.6);
       border-color: rgba(200,255,71,0.2);
-      transition:
-        transform 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-        box-shadow 0.3s ease,
-        border-color 0.25s ease;
+      transition: transform 0.38s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.3s ease, border-color 0.25s ease;
     }
 
     .anim-board.is-settled .anim-card-flying {
       box-shadow: 0 2px 10px rgba(0,0,0,0.4);
       border-color: var(--border);
       background: var(--surface2);
-      transition:
-        transform 0.15s ease,
-        box-shadow 0.25s ease,
-        border-color 0.25s ease,
-        background 0.25s ease;
+      transition: transform 0.15s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
     }
 
-    /* Cursor dot that follows the card */
     .anim-cursor {
       position: absolute;
       width: 22px; height: 22px;
@@ -906,7 +665,7 @@
       pointer-events: none;
       z-index: 30;
       opacity: 0;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%,-50%);
       transition: opacity 0.25s ease;
     }
 
@@ -914,40 +673,595 @@
     .anim-board.is-dragging .anim-cursor,
     .anim-board.is-dropping .anim-cursor { opacity: 1; }
 
-    @media (max-width: 768px) {
+    /* ── FEATURES ────────────────────────────────────────────────────────────── */
+    #features { background: var(--surface); }
+
+    .features-inner {
+      padding: 120px 48px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .features-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: end;
+      margin-bottom: 72px;
+    }
+
+    .features-header-right {
+      font-size: 15px;
+      color: var(--text2);
+      line-height: 1.75;
+      padding-bottom: 6px;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      padding: 32px 28px;
+      transition: background 0.2s;
+    }
+
+    .feature-card:hover { background: var(--surface2); }
+
+    .feature-num {
+      font-family: var(--display);
+      font-size: 52px;
+      color: var(--text3);
+      line-height: 1;
+      margin-bottom: 20px;
+      letter-spacing: 0.02em;
+    }
+
+    .feature-icon {
+      width: 38px; height: 38px;
+      border-radius: 8px;
+      background: rgba(200,255,71,0.07);
+      border: 1px solid rgba(200,255,71,0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+
+    .feature-icon svg { stroke: var(--accent); }
+
+    .feature-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .feature-desc {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.7;
+    }
+
+    .feature-badge {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 9px;
+      font-family: var(--mono);
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(200,255,71,0.08);
+      border: 1px solid rgba(200,255,71,0.15);
+    }
+
+    /* ── HOW IT WORKS ────────────────────────────────────────────────────────── */
+    .steps-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      margin-top: 64px;
+    }
+
+    .step-card {
+      background: var(--surface);
+      padding: 40px 36px;
+      transition: background 0.2s;
+    }
+
+    .step-card:hover { background: var(--surface2); }
+
+    .step-num-big {
+      font-family: var(--display);
+      font-size: 80px;
+      line-height: 0.85;
+      color: var(--text3);
+      margin-bottom: 24px;
+      letter-spacing: 0.02em;
+    }
+
+    .step-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .step-desc {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.7;
+    }
+
+    /* ── STAT BAR ────────────────────────────────────────────────────────────── */
+    .stat-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stat-item {
+      padding: 48px 48px;
+      background: var(--bg);
+    }
+
+    .stat-num {
+      font-family: var(--display);
+      font-size: clamp(56px, 6vw, 80px);
+      color: var(--text);
+      line-height: 0.9;
+      letter-spacing: 0.01em;
+      margin-bottom: 10px;
+    }
+
+    .stat-num span { color: var(--accent); }
+
+    .stat-label {
+      font-size: 13px;
+      color: var(--text2);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── COLLAB ──────────────────────────────────────────────────────────────── */
+    .collab-section {
+      padding: 0 48px 120px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .collab-block {
+      background: var(--surface);
+      border: 1px solid var(--border2);
+      border-radius: 16px;
+      padding: 64px 64px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .collab-block::before {
+      content: '';
+      position: absolute;
+      top: -100px; right: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(ellipse, rgba(200,255,71,0.05) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .collab-sub {
+      font-size: 15px;
+      color: var(--text2);
+      line-height: 1.75;
+      margin: 20px 0 36px;
+      max-width: 400px;
+    }
+
+    .collab-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .member-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+    }
+
+    .member-avatar {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .member-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      flex: 1;
+    }
+
+    .member-role {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 6px;
+      font-family: var(--mono);
+      letter-spacing: 0.04em;
+    }
+
+    .invite-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 16px;
+      background: rgba(200,255,71,0.04);
+      border: 1px dashed rgba(200,255,71,0.2);
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(200,255,71,0.5);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── PRICING ─────────────────────────────────────────────────────────────── */
+    #pricing {
+      padding: 120px 48px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .pricing-header {
+      text-align: center;
+      margin-bottom: 64px;
+    }
+
+    .pricing-sub {
+      font-size: 16px;
+      color: var(--text2);
+      max-width: 480px;
+      margin: 20px auto 0;
+      line-height: 1.7;
+    }
+
+    .pricing-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .pricing-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 36px;
+    }
+
+    .pricing-card.featured {
+      border-color: rgba(200,255,71,0.3);
+      background: linear-gradient(160deg, rgba(200,255,71,0.04) 0%, var(--surface) 100%);
+      position: relative;
+    }
+
+    .pricing-badge {
+      position: absolute;
+      top: -13px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: #080808;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 100px;
+      white-space: nowrap;
+      font-family: var(--mono);
+    }
+
+    .pricing-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text2);
+      margin-bottom: 16px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: var(--mono);
+    }
+
+    .pricing-price {
+      font-family: var(--display);
+      font-size: 72px;
+      color: var(--text);
+      line-height: 0.9;
+      margin-bottom: 6px;
+      letter-spacing: 0.01em;
+    }
+
+    .pricing-price-sub {
+      font-size: 12px;
+      color: var(--text3);
+      margin-bottom: 32px;
+      font-family: var(--mono);
+    }
+
+    .pricing-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .pricing-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    .check { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; }
+    .check-accent { stroke: var(--accent); }
+    .check-muted  { stroke: var(--text3); }
+
+    /* ── CTA BAND ────────────────────────────────────────────────────────────── */
+    .cta-band {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 80px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 100%, rgba(200,255,71,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .cta-giant {
+      font-family: var(--display);
+      font-size: clamp(72px, 12vw, 160px);
+      line-height: 0.9;
+      color: var(--text);
+      letter-spacing: 0.02em;
+      margin-bottom: 8px;
+    }
+
+    .cta-giant .accent { color: var(--accent); }
+
+    .cta-band-sub {
+      font-size: 16px;
+      color: var(--text2);
+      margin-bottom: 36px;
+      margin-top: 20px;
+    }
+
+    /* ── DOWNLOAD ────────────────────────────────────────────────────────────── */
+    #download {
+      padding: 120px 48px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .download-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      margin-top: 64px;
+    }
+
+    .install-steps { display: flex; flex-direction: column; gap: 28px; }
+
+    .install-step { display: flex; gap: 18px; align-items: flex-start; }
+
+    .install-step-num {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #080808;
+      font-size: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      font-family: var(--mono);
+    }
+
+    .install-step-body strong { display: block; font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 5px; }
+    .install-step-body span  { font-size: 13px; color: var(--text2); line-height: 1.65; }
+
+    .security-box {
+      background: rgba(255,160,0,0.05);
+      border: 1px solid rgba(255,160,0,0.22);
+      border-radius: 12px;
+      padding: 24px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .security-box-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: #ffab00;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .security-box p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+
+    .virustotal-note {
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid var(--border2);
+      border-radius: 10px;
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .virustotal-note a { color: var(--accent); text-decoration: none; }
+
+    /* ── FOOTER ──────────────────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 36px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-copy {
+      font-size: 12px;
+      color: var(--text3);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      color: var(--text3);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .footer-links a:hover { color: var(--text2); }
+
+    /* ── DIVIDER ─────────────────────────────────────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* ── SCROLL PROGRESS ─────────────────────────────────────────────────────── */
+    #scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent) 0%, rgba(200,255,71,0.5) 100%);
+      z-index: 9999;
+      box-shadow: 0 0 14px rgba(200,255,71,0.65), 0 0 4px rgba(200,255,71,0.4);
+      pointer-events: none;
+      transform-origin: left;
+    }
+
+    /* ── MARQUEE GRADIENT MASKS ───────────────────────────────────────────────── */
+    .marquee-wrap {
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+      mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
+    }
+
+    /* ── CARD TILT HINT ──────────────────────────────────────────────────────── */
+    .feature-card, .step-card {
+      will-change: transform;
+      transform-style: preserve-3d;
+    }
+
+    /* ── SCRAMBLE ────────────────────────────────────────────────────────────── */
+    .section-tag { min-height: 1.4em; }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 100px 24px 64px; }
+      .hero-right { display: none; }
+      .section { padding: 80px 24px; }
+      .features-inner { padding: 80px 24px; }
+      .features-header { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .stat-bar { grid-template-columns: 1fr; }
+      .stat-item { padding: 32px 24px; }
+      .collab-section { padding: 0 24px 80px; }
+      .collab-block { grid-template-columns: 1fr; padding: 36px 28px; gap: 40px; }
+      #pricing { padding: 80px 24px; }
+      .pricing-wrap { grid-template-columns: 1fr; max-width: 440px; }
+      #download { padding: 80px 24px; }
+      .download-grid { grid-template-columns: 1fr; gap: 48px; }
+      footer { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
       .anim-board { flex-direction: column; max-width: 320px; }
       .anim-board .anim-col:nth-child(2),
       .anim-board .anim-col:nth-child(3) { display: none; }
       .anim-card-flying, .anim-cursor { display: none; }
-    }
-
-    /* ── DIVIDER ─────────────────────────────────────────────────────────── */
-    .divider {
-      width: 100%;
-      height: 1px;
-      background: var(--border);
-      max-width: 1080px;
-      margin: 0 auto;
-    }
-
-    /* ── RESPONSIVE ──────────────────────────────────────────────────────── */
-    @media (max-width: 768px) {
-      nav { padding: 0 20px; }
-      .nav-links { display: none; }
-      .features-grid { grid-template-columns: 1fr; }
-      .collab-block { flex-direction: column; gap: 32px; padding: 32px 24px; }
-      .pricing-wrap { flex-direction: column; }
-      footer { flex-direction: column; align-items: flex-start; padding: 32px 24px; }
-      .board-preview { display: none; }
+      #in-action { padding: 80px 24px; }
+      .in-action-header { flex-direction: column; align-items: flex-start; }
+      .cta-band { padding: 60px 24px; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Scroll progress -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+
+  <!-- Grain -->
+  <div class="grain" aria-hidden="true"></div>
+
   <!-- NAV -->
-  <nav>
+  <nav id="main-nav">
     <a href="#" class="nav-logo">
-      <img src="logo.svg" alt="TrackFlow" height="26" style="display:block" />
+      <div class="nav-logo-mark">
+        <div class="nav-logo-bar" style="height:10px"></div>
+        <div class="nav-logo-bar" style="height:16px"></div>
+        <div class="nav-logo-bar" style="height:7px"></div>
+      </div>
+      <span class="nav-logo-name">TRACKFLOW</span>
     </a>
     <ul class="nav-links">
       <li><a href="#features">Features</a></li>
@@ -956,147 +1270,143 @@
       <li><a href="#download">Download</a></li>
     </ul>
     <a href="https://github.com/gnznaki/TrackFlowRelease/releases/tag/v1.2.1" class="btn btn-primary" target="_blank" rel="noopener">
-      Download — Free
+      Download Free
     </a>
   </nav>
 
   <!-- HERO -->
-  <section class="hero" style="max-width:100%; padding-top: 140px;">
-    <div class="hero-badge">
-      <div class="hero-badge-dot"></div>
-      For Producers &amp; Engineers
-    </div>
-    <h1>Your DAW projects.<br /><span>Finally organized.</span></h1>
-    <p>TrackFlow automatically finds your FL Studio, Ableton, Pro Tools, and Reaper projects and turns them into a visual board you can actually work with. <span style="color:var(--text3);font-size:13px">Mac &amp; Logic Pro support in development.</span></p>
-    <div class="hero-ctas">
-      <a href="https://github.com/gnznaki/TrackFlowRelease/releases/tag/v1.2.1" class="btn btn-primary" target="_blank" rel="noopener">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        Download for Windows — Free
-      </a>
-      <a href="#pricing" class="btn btn-ghost">See pricing</a>
-    </div>
-    <div class="daw-badges">
-      <div class="daw-badge"><div class="daw-dot" style="background:var(--fl)"></div><span style="color:var(--fl)">FL Studio</span></div>
-      <div class="daw-badge"><div class="daw-dot" style="background:var(--ab)"></div><span style="color:var(--ab)">Ableton</span></div>
-      <div class="daw-badge"><div class="daw-dot" style="background:var(--pt)"></div><span style="color:var(--pt)">Pro Tools</span></div>
-      <div class="daw-badge"><div class="daw-dot" style="background:var(--rp)"></div><span style="color:var(--rp)">Reaper</span></div>
-      <div class="daw-badge" style="opacity:0.45" title="Mac + Logic Pro support in development"><div class="daw-dot" style="background:#3d78d0"></div><span style="color:#3d78d0">Logic Pro <span style="font-size:9px;opacity:0.8">(soon)</span></span></div>
+  <div class="hero">
+    <div class="hero-glow"></div>
+
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <div class="hero-eyebrow-dot"></div>
+        For Producers &amp; Engineers
+      </div>
+
+      <h1 class="hero-headline">
+        YOUR<br />PROJECTS.<br />
+        <span class="line-accent">FINALLY<br />ORGANIZED.</span>
+      </h1>
+
+      <p class="hero-sub">
+        TrackFlow automatically finds your FL Studio, Ableton, Pro Tools, and Reaper projects and turns them into a visual board you can actually work with.
+        <span style="color:var(--text3);font-size:13px;display:block;margin-top:8px">Mac &amp; Logic Pro support in development.</span>
+      </p>
+
+      <div class="hero-ctas">
+        <a href="https://github.com/gnznaki/TrackFlowRelease/releases/tag/v1.2.1" class="btn btn-primary btn-xl" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download — Free
+        </a>
+        <a href="#pricing" class="btn btn-ghost btn-xl">See pricing</a>
+      </div>
+
+      <div class="daw-badges">
+        <div class="daw-badge"><div class="daw-dot" style="background:var(--fl)"></div><span style="color:var(--fl)">FL Studio</span></div>
+        <div class="daw-badge"><div class="daw-dot" style="background:var(--ab)"></div><span style="color:var(--ab)">Ableton</span></div>
+        <div class="daw-badge"><div class="daw-dot" style="background:var(--pt)"></div><span style="color:var(--pt)">Pro Tools</span></div>
+        <div class="daw-badge"><div class="daw-dot" style="background:var(--rp)"></div><span style="color:var(--rp)">Reaper</span></div>
+        <div class="daw-badge" style="opacity:0.4" title="Mac + Logic Pro in development"><div class="daw-dot" style="background:#3d78d0"></div><span style="color:#3d78d0">Logic Pro <span style="font-size:8px">(soon)</span></span></div>
+      </div>
     </div>
 
-    <!-- Board Preview -->
-    <div class="preview-wrap">
-      <div class="board-preview">
-        <!-- Column 1 -->
-        <div class="col-preview">
-          <div class="col-header">
-            <div class="col-dot" style="background:#555"></div>
-            <span class="col-title">Idea Dump</span>
-            <span class="col-count">3</span>
-          </div>
-          <div class="card-preview">
-            <div class="card-title">midnight loop v3</div>
-            <div class="card-path">~/Studio/midnight loop v3.flp</div>
-            <div class="card-footer">
-              <div class="card-tag" style="background:rgba(255,140,0,0.12);color:#ff8c00">trap</div>
-              <span class="card-daw" style="color:var(--fl)">FLP</span>
+    <!-- 3D Board Visual -->
+    <div class="hero-right">
+      <div class="board-scene">
+        <div class="board-tilt">
+          <div class="board-glow"></div>
+
+          <!-- Col 1: Idea Dump -->
+          <div class="b-col">
+            <div class="b-col-head">
+              <div class="b-col-head-dot" style="background:#333"></div>
+              Idea Dump
+            </div>
+            <div class="b-card b-card-lift">
+              <div class="b-card-title">NEON HAZE — main</div>
+              <div class="b-card-tag" style="color:#47c8ff">mixing</div>
+              <div class="b-card-daw">ALS</div>
+            </div>
+            <div class="b-card">
+              <div class="b-card-title">808 experiment</div>
+              <div class="b-card-tag" style="color:#c8ff47">WIP</div>
+              <div class="b-card-daw">FLP</div>
+            </div>
+            <div class="b-card">
+              <div class="b-card-title">midnight loop v3</div>
+              <div class="b-card-tag" style="color:#ff8c00">trap</div>
+              <div class="b-card-daw">FLP</div>
             </div>
           </div>
-          <div class="card-preview">
-            <div class="card-title">808 experiment</div>
-            <div class="card-path">~/Studio/808 experiment.flp</div>
-            <div class="card-footer">
-              <div class="card-tag" style="background:rgba(200,255,71,0.1);color:#c8ff47">WIP</div>
-              <span class="card-daw" style="color:var(--fl)">FLP</span>
+
+          <!-- Col 2: In Progress (active) -->
+          <div class="b-col b-col-active">
+            <div class="b-col-head" style="color:var(--accent)">
+              <div class="b-col-head-dot" style="background:var(--accent)"></div>
+              In Progress
+            </div>
+            <div class="b-card">
+              <div class="b-card-title">collab_session_03</div>
+              <div class="b-card-tag" style="color:#b847ff">collab</div>
+              <div class="b-card-daw">ALS</div>
+            </div>
+            <div class="b-card">
+              <div class="b-card-title">CARBON EP — mix</div>
+              <div class="b-card-tag" style="color:#3af0b0">mixing</div>
+              <div class="b-card-daw">ALS</div>
             </div>
           </div>
-        </div>
-        <!-- Column 2 -->
-        <div class="col-preview">
-          <div class="col-header">
-            <div class="col-dot" style="background:#c8ff47"></div>
-            <span class="col-title">In Progress</span>
-            <span class="col-count">2</span>
-          </div>
-          <div class="card-preview" style="border-color:rgba(200,255,71,0.15)">
-            <div class="card-title">NEON HAZE — main</div>
-            <div class="card-path">~/Projects/NEON HAZE.als</div>
-            <div class="card-footer">
-              <div class="card-tag" style="background:rgba(71,200,255,0.1);color:#47c8ff">mixing</div>
-              <span class="card-daw" style="color:var(--ab)">ALS</span>
+
+          <!-- Col 3: Done -->
+          <div class="b-col">
+            <div class="b-col-head">
+              <div class="b-col-head-dot" style="background:#3af0b0"></div>
+              Done
             </div>
-          </div>
-          <div class="card-preview">
-            <div class="card-title">collab_session_03</div>
-            <div class="card-path">~/Collabs/session_03.als</div>
-            <div class="card-footer">
-              <div class="card-tag" style="background:rgba(183,71,255,0.1);color:#b847ff">collab</div>
-              <span class="card-daw" style="color:var(--ab)">ALS</span>
+            <div class="b-card">
+              <div class="b-card-title">VOID — full session</div>
+              <div class="b-card-tag" style="color:#4780ff">review</div>
+              <div class="b-card-daw">PTX</div>
             </div>
-          </div>
-        </div>
-        <!-- Column 3 -->
-        <div class="col-preview">
-          <div class="col-header">
-            <div class="col-dot" style="background:#47c8ff"></div>
-            <span class="col-title">Mixing</span>
-            <span class="col-count">1</span>
-          </div>
-          <div class="card-preview">
-            <div class="card-title">VOID — full session</div>
-            <div class="card-path">~/Sessions/VOID_main.ptx</div>
-            <div class="card-footer">
-              <div class="card-tag" style="background:rgba(71,128,255,0.1);color:#4780ff">review</div>
-              <span class="card-daw" style="color:var(--pt)">PTX</span>
-            </div>
-          </div>
-        </div>
-        <!-- Column 4 -->
-        <div class="col-preview">
-          <div class="col-header">
-            <div class="col-dot" style="background:#3af0b0"></div>
-            <span class="col-title">Done</span>
-            <span class="col-count">4</span>
-          </div>
-          <div class="card-preview">
-            <div class="card-title">CARBON EP — master</div>
-            <div class="card-path">~/Releases/CARBON_master.als</div>
-            <div class="card-footer">
-              <div class="card-tag" style="background:rgba(58,240,176,0.1);color:#3af0b0">released</div>
-              <span class="card-daw" style="color:var(--ab)">ALS</span>
-            </div>
-          </div>
-          <div class="card-preview">
-            <div class="card-title">summer sessions vol.1</div>
-            <div class="card-path">~/Releases/summer_v1.flp</div>
-            <div class="card-footer">
-              <div class="card-tag" style="background:rgba(58,240,176,0.1);color:#3af0b0">released</div>
-              <span class="card-daw" style="color:var(--fl)">FLP</span>
+            <div class="b-card">
+              <div class="b-card-title">summer sessions vol.1</div>
+              <div class="b-card-tag" style="color:#3af0b0">released</div>
+              <div class="b-card-daw">FLP</div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <div class="divider"></div>
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <!-- doubled for seamless loop -->
+      <div class="marquee-item"><span>FL Studio</span><span class="marquee-sep">·</span><span>Ableton Live</span><span class="marquee-sep">·</span><span>Pro Tools</span><span class="marquee-sep">·</span><span>Reaper</span><span class="marquee-sep">·</span>Kanban Board<span class="marquee-sep">·</span>Auto-Scan<span class="marquee-sep">·</span>Tags &amp; Notes<span class="marquee-sep">·</span>One-Click Open<span class="marquee-sep">·</span>Cloud Sync<span class="marquee-sep">·</span>Collaboration<span class="marquee-sep">·</span>Real-Time Updates<span class="marquee-sep">·</span>Custom Themes<span class="marquee-sep">·</span>Keyboard Shortcuts<span class="marquee-sep">·</span></div>
+      <div class="marquee-item"><span>FL Studio</span><span class="marquee-sep">·</span><span>Ableton Live</span><span class="marquee-sep">·</span><span>Pro Tools</span><span class="marquee-sep">·</span><span>Reaper</span><span class="marquee-sep">·</span>Kanban Board<span class="marquee-sep">·</span>Auto-Scan<span class="marquee-sep">·</span>Tags &amp; Notes<span class="marquee-sep">·</span>One-Click Open<span class="marquee-sep">·</span>Cloud Sync<span class="marquee-sep">·</span>Collaboration<span class="marquee-sep">·</span>Real-Time Updates<span class="marquee-sep">·</span>Custom Themes<span class="marquee-sep">·</span>Keyboard Shortcuts<span class="marquee-sep">·</span></div>
+    </div>
+  </div>
 
-  <!-- BOARD DRAG ANIMATION -->
-  <section class="anim-section" id="in-action">
-    <div class="section-label">See it work</div>
-    <div class="section-title">One drag. Whole workflow.</div>
-    <div class="section-sub">Move a project between stages as fast as you think.</div>
+  <!-- IN ACTION -->
+  <div id="in-action">
+    <div class="in-action-header">
+      <div>
+        <div class="section-tag reveal">See it work</div>
+        <div class="display-heading reveal" style="transition-delay:0.08s">ONE DRAG.<br /><span class="accent">WHOLE WORKFLOW.</span></div>
+      </div>
+      <p class="in-action-sub reveal-right">Move a project between stages as fast as you think. TrackFlow stays out of the way.</p>
+    </div>
 
-    <div class="anim-board-outer">
+    <div class="anim-board-outer reveal" style="transition-delay:0.12s">
       <div class="anim-board" id="anim-board">
-
-        <!-- Col 1: Idea Dump -->
         <div class="anim-col">
           <div class="anim-col-head">
-            <div class="anim-dot" style="background:#444"></div>
+            <div class="anim-dot" style="background:#333"></div>
             <span>Idea Dump</span>
             <span class="anim-count">3</span>
           </div>
-          <!-- ghost slot — shows dashed when card is being dragged -->
           <div class="anim-card anim-ghost" id="anim-ghost">
             <div class="anim-card-title">NEON HAZE — main</div>
             <div class="anim-card-tag" style="color:#47c8ff">mixing</div>
@@ -1112,8 +1422,6 @@
             <div class="anim-card-daw">FLP</div>
           </div>
         </div>
-
-        <!-- Col 2: In Progress -->
         <div class="anim-col">
           <div class="anim-col-head">
             <div class="anim-dot" style="background:var(--accent)"></div>
@@ -1131,15 +1439,12 @@
             <div class="anim-card-daw">ALS</div>
           </div>
         </div>
-
-        <!-- Col 3: Mixing — drop target -->
         <div class="anim-col">
           <div class="anim-col-head">
             <div class="anim-dot" style="background:#47c8ff"></div>
             <span style="color:#47c8ff">Mixing</span>
             <span class="anim-count">1</span>
           </div>
-          <!-- drop zone indicator (height animates to 60px on hover) -->
           <div class="anim-drop-zone" id="anim-drop-zone"></div>
           <div class="anim-card">
             <div class="anim-card-title">VOID — full session</div>
@@ -1147,331 +1452,286 @@
             <div class="anim-card-daw">PTX</div>
           </div>
         </div>
-
-        <!-- Flying/dragging card (absolutely positioned, driven by JS) -->
         <div class="anim-card anim-card-flying" id="anim-flying">
           <div class="anim-card-title">NEON HAZE — main</div>
           <div class="anim-card-tag" style="color:#47c8ff">mixing</div>
           <div class="anim-card-daw">ALS</div>
         </div>
-
-        <!-- Cursor dot -->
         <div class="anim-cursor" id="anim-cursor"></div>
-
       </div>
     </div>
-  </section>
+  </div>
 
-  <div class="divider"></div>
+  <!-- STAT BAR -->
+  <div class="stat-bar">
+    <div class="stat-item reveal">
+      <div class="stat-num">4<span>+</span></div>
+      <div class="stat-label">DAWs supported</div>
+    </div>
+    <div class="stat-item reveal" style="transition-delay:0.1s">
+      <div class="stat-num"><span>$</span>0</div>
+      <div class="stat-label">Core features, forever free</div>
+    </div>
+    <div class="stat-item reveal" style="transition-delay:0.2s">
+      <div class="stat-num">2<span>min</span></div>
+      <div class="stat-label">To get set up</div>
+    </div>
+  </div>
 
   <!-- FEATURES -->
-  <section id="features">
-    <div class="section-label">Features</div>
-    <div class="section-title">Everything you need to stay on top of your work</div>
-    <div class="section-sub">Built for the way producers actually work — not how project managers think they do.</div>
-
-    <div class="features-grid">
-
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+  <section id="features" style="padding:0;max-width:100%;margin:0">
+    <div class="features-inner">
+      <div class="features-header">
+        <div>
+          <div class="section-tag reveal">Features</div>
+          <div class="display-heading reveal" style="transition-delay:0.08s">EVERYTHING<br />YOU NEED.</div>
         </div>
-        <div class="feature-title">Auto-scan DAW files</div>
-        <div class="feature-desc">Point TrackFlow at your drives and it finds every .flp, .als, .ptx, .rpp file automatically. No manual importing.</div>
+        <p class="features-header-right reveal-right">Built for the way producers actually work — not how project managers think they do.</p>
       </div>
 
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      <div class="features-grid">
+        <div class="feature-card reveal" style="transition-delay:0s">
+          <div class="feature-num">01</div>
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <div class="feature-title">Auto-scan DAW files</div>
+          <div class="feature-desc">Point TrackFlow at your drives and it finds every .flp, .als, .ptx, .rpp file automatically. No manual importing.</div>
         </div>
-        <div class="feature-title">Visual kanban boards</div>
-        <div class="feature-desc">Drag projects between columns — Idea, In Progress, Mixing, Done — or define your own stages.</div>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        <div class="feature-card reveal" style="transition-delay:0.07s">
+          <div class="feature-num">02</div>
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <div class="feature-title">Visual kanban board</div>
+          <div class="feature-desc">Drag projects between columns — Idea, In Progress, Mixing, Done — or define your own stages entirely.</div>
         </div>
-        <div class="feature-title">Notes &amp; custom tags</div>
-        <div class="feature-desc">Add session notes, BPM, key, client info — whatever you need. Tag and filter across all your projects.</div>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+        <div class="feature-card reveal" style="transition-delay:0.14s">
+          <div class="feature-num">03</div>
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div class="feature-title">Notes &amp; custom tags</div>
+          <div class="feature-desc">Add session notes, BPM, key, client info — whatever you need. Tag and filter across all your projects.</div>
         </div>
-        <div class="feature-title">One-click open in DAW</div>
-        <div class="feature-desc">Click any card to open the project file directly in FL Studio, Ableton, Pro Tools, or Reaper. No finder, no file browser.</div>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+        <div class="feature-card reveal" style="transition-delay:0.07s">
+          <div class="feature-num">04</div>
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+          </div>
+          <div class="feature-title">One-click open in DAW</div>
+          <div class="feature-desc">Click any card to open the project file directly in FL Studio, Ableton, Pro Tools, or Reaper. No finder, no file browser.</div>
         </div>
-        <div class="feature-title">Cloud sync</div>
-        <div class="feature-desc">Your board stays in sync across every machine you work on. Switch computers without losing your place. <span style="color:var(--accent);font-weight:700">Premium</span></div>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div class="feature-card reveal" style="transition-delay:0.14s">
+          <div class="feature-num">05</div>
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+          </div>
+          <div class="feature-title">Cloud sync</div>
+          <div class="feature-desc">Your board stays in sync across every machine you work on. Switch computers without losing your place.</div>
+          <div class="feature-badge">Premium</div>
         </div>
-        <div class="feature-title">Real-time collaboration</div>
-        <div class="feature-desc">Share boards with producers, engineers, or A&amp;R. Everyone sees changes in real-time with role-based access. <span style="color:var(--accent);font-weight:700">Premium</span></div>
+        <div class="feature-card reveal" style="transition-delay:0.21s">
+          <div class="feature-num">06</div>
+          <div class="feature-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="feature-title">Real-time collaboration</div>
+          <div class="feature-desc">Share boards with producers, engineers, or A&amp;R. Everyone sees changes live with role-based access.</div>
+          <div class="feature-badge">Premium</div>
+        </div>
       </div>
-
     </div>
   </section>
-
-  <div class="divider"></div>
 
   <!-- HOW IT WORKS -->
-  <section id="how-it-works">
-    <div class="section-label">How it works</div>
-    <div class="section-title">Set up in under two minutes</div>
-    <div class="section-sub">No import wizard, no manual setup. TrackFlow finds your files and you start organizing.</div>
+  <div class="section" id="how-it-works">
+    <div class="section-tag reveal">How it works</div>
+    <div class="display-heading reveal" style="transition-delay:0.08s">SET UP IN<br /><span class="accent">TWO MINUTES.</span></div>
 
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">01</div>
-        <div class="step-body">
-          <div class="step-title">Download and install</div>
-          <div class="step-desc">TrackFlow is a native Windows desktop app. Download the installer, run it, and you're in.</div>
-        </div>
+    <div class="steps-grid">
+      <div class="step-card reveal" style="transition-delay:0s">
+        <div class="step-num-big">01</div>
+        <div class="step-title">Download and install</div>
+        <div class="step-desc">TrackFlow is a native Windows desktop app. Download the installer, run it, and you're in. No account required.</div>
       </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <div class="step-body">
-          <div class="step-title">Point it at your folders</div>
-          <div class="step-desc">Select the folders where you keep your DAW projects. TrackFlow scans them and finds every .flp, .als, .ptx, and .rpp file automatically.</div>
-        </div>
+      <div class="step-card reveal" style="transition-delay:0.08s">
+        <div class="step-num-big">02</div>
+        <div class="step-title">Point it at your folders</div>
+        <div class="step-desc">Select the folders where you keep your DAW projects. TrackFlow scans them and finds every .flp, .als, .ptx, and .rpp file automatically.</div>
       </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <div class="step-body">
-          <div class="step-title">Drag, organize, and ship</div>
-          <div class="step-desc">Move cards between columns to reflect where each project is. Add tags, notes, and open files directly in your DAW with one click.</div>
-        </div>
+      <div class="step-card reveal" style="transition-delay:0.16s">
+        <div class="step-num-big">03</div>
+        <div class="step-title">Drag, organize, and ship</div>
+        <div class="step-desc">Move cards between columns to reflect where each project is. Add tags, notes, and open files directly in your DAW with one click.</div>
       </div>
-      <div class="step">
-        <div class="step-num">04</div>
-        <div class="step-body">
-          <div class="step-title">Collaborate (Premium)</div>
-          <div class="step-desc">Share a board code with your engineer or co-producer. They join, see the same board in real-time, and can move cards based on their role.</div>
-        </div>
+      <div class="step-card reveal" style="transition-delay:0.24s">
+        <div class="step-num-big">04</div>
+        <div class="step-title">Collaborate (Premium)</div>
+        <div class="step-desc">Share a board code with your engineer or co-producer. They join, see the same board in real-time, and can move cards based on their role.</div>
       </div>
     </div>
-  </section>
-
-  <div class="divider"></div>
+  </div>
 
   <!-- COLLAB -->
-  <section style="padding-top: 80px; padding-bottom: 80px;">
+  <div class="collab-section">
     <div class="collab-block">
-      <div class="collab-text">
-        <div class="section-label">Collaboration</div>
-        <div class="section-title">Built for the studio, not just the bedroom.</div>
-        <div class="section-sub">Share a board with your engineer, your A&R, or your co-producer. Set roles so the right people can edit, and viewers can see without breaking anything.</div>
-        <a href="#download" class="btn btn-primary">Download Free</a>
+      <div class="reveal-left">
+        <div class="section-tag">Collaboration</div>
+        <div class="display-heading" style="margin-top:8px">BUILT FOR<br />THE STUDIO.</div>
+        <p class="collab-sub">Share a board with your engineer, your A&R, or your co-producer. Set roles so the right people can edit, and viewers can see without breaking anything.</p>
+        <a href="#download" class="btn btn-primary" style="font-size:14px;padding:12px 28px">Download Free</a>
       </div>
-      <div class="collab-visual">
+      <div class="collab-visual reveal-right" style="transition-delay:0.1s">
         <div class="member-row">
           <div class="member-avatar" style="background:linear-gradient(135deg,#c8ff47,#3af0b0)"></div>
           <span class="member-name">You</span>
-          <div class="member-role" style="background:rgba(200,255,71,0.12);color:#c8ff47">Owner</div>
+          <div class="member-role" style="background:rgba(200,255,71,0.1);color:#c8ff47">Owner</div>
         </div>
         <div class="member-row">
           <div class="member-avatar" style="background:linear-gradient(135deg,#47c8ff,#4780ff)"></div>
-          <span class="member-name">Engineer</span>
+          <span class="member-name">Your Engineer</span>
           <div class="member-role" style="background:rgba(58,240,176,0.1);color:#3af0b0">Collaborator</div>
         </div>
         <div class="member-row">
           <div class="member-avatar" style="background:linear-gradient(135deg,#b847ff,#ff47b8)"></div>
           <span class="member-name">A&amp;R Rep</span>
-          <div class="member-role" style="background:rgba(255,255,255,0.05);color:#a0a0a8">Viewer</div>
+          <div class="member-role" style="background:rgba(255,255,255,0.05);color:var(--text2)">Viewer</div>
         </div>
-        <div style="padding:10px 14px;background:rgba(200,255,71,0.04);border:1px dashed rgba(200,255,71,0.2);border-radius:10px;font-size:12px;color:#c8ff47;text-align:center;">
-          + Invite by email
-        </div>
+        <div class="invite-row">+ Invite by email</div>
       </div>
     </div>
-  </section>
-
-  <div class="divider"></div>
+  </div>
 
   <!-- PRICING -->
-  <section id="pricing" style="text-align:center;">
-    <div class="section-label" style="text-align:center">Pricing</div>
-    <div class="section-title" style="max-width:100%;margin-left:auto;margin-right:auto;margin-bottom:14px">Free now. More coming soon.</div>
-    <div class="section-sub" style="max-width:480px;margin:0 auto 52px">The core app is <strong style="color:var(--text)">completely free</strong> and always will be. Premium features — collaboration, cloud sync — are on the way as an optional one-time upgrade.</div>
-
-    <div class="pricing-wrap">
-
-      <!-- Free -->
-      <div class="pricing-card">
-        <div class="pricing-name">Free</div>
-        <div class="pricing-price"><sup>$</sup>0</div>
-        <div class="pricing-period">forever</div>
-        <ul class="pricing-features">
-          <li>
-            <svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-            Unlimited local boards
-          </li>
-          <li>
-            <svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-            Auto-scan DAW projects
-          </li>
-          <li>
-            <svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-            Custom tags &amp; notes
-          </li>
-          <li>
-            <svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-            One-click open in DAW
-          </li>
-          <li>
-            <svg class="check check-muted" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-            <span style="color:var(--text3)">Cloud sync</span>
-          </li>
-          <li>
-            <svg class="check check-muted" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-            <span style="color:var(--text3)">Collaboration</span>
-          </li>
-        </ul>
-        <a href="https://github.com/gnznaki/TrackFlowRelease/releases/tag/v1.2.1" class="btn btn-ghost" style="width:100%;justify-content:center" target="_blank" rel="noopener">Download Free</a>
+  <section id="pricing" style="padding:0;max-width:100%;margin:0;background:var(--surface)">
+    <div style="padding:120px 48px;max-width:1280px;margin:0 auto;">
+      <div class="pricing-header reveal">
+        <div class="section-tag" style="justify-content:center">Pricing</div>
+        <div class="display-heading" style="margin-top:12px">FREE NOW.<br /><span class="accent">MORE COMING.</span></div>
+        <p class="pricing-sub">The core app is <strong style="color:var(--text)">completely free</strong> and always will be. Premium features are on the way as an optional one-time upgrade.</p>
       </div>
 
-      <!-- Premium -->
-      <div class="pricing-card featured">
-        <div class="pricing-badge" style="background:rgba(200,255,71,0.15);color:var(--accent);border:1px solid rgba(200,255,71,0.3)">Coming Soon</div>
-        <div class="pricing-name" style="color:var(--accent)">Premium</div>
-        <div class="pricing-price" style="color:var(--accent);font-size:28px;padding-top:4px">On the way</div>
-        <div class="pricing-period">one-time payment · no subscription · ever</div>
-        <ul class="pricing-features">
-          <li>
-            <svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-            Everything in Free
-          </li>
-          <li>
-            <svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-            Cloud backup &amp; sync
-          </li>
-          <li>
-            <svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-            Share boards in real-time
-          </li>
-          <li>
-            <svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-            Invite collaborators by email
-          </li>
-          <li>
-            <svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-            Role-based access control
-          </li>
-          <li>
-            <svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-            Multi-device state sync
-          </li>
-        </ul>
-        <div style="width:100%;padding:13px 0;background:rgba(200,255,71,0.07);border:1px solid rgba(200,255,71,0.2);border-radius:10px;text-align:center;font-size:13px;font-weight:800;color:rgba(200,255,71,0.5);letter-spacing:0.06em">COMING SOON</div>
-        <div style="font-size:11px;color:var(--text3);text-align:center;margin-top:10px">Free forever for core features · Premium unlocks collaboration</div>
-      </div>
+      <div class="pricing-wrap">
+        <div class="pricing-card reveal" style="transition-delay:0.05s">
+          <div class="pricing-name">Free</div>
+          <div class="pricing-price">$0</div>
+          <div class="pricing-price-sub">forever</div>
+          <ul class="pricing-features">
+            <li><svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Unlimited local boards</li>
+            <li><svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Auto-scan DAW projects</li>
+            <li><svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Custom tags &amp; notes</li>
+            <li><svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>One-click open in DAW</li>
+            <li><svg class="check check-muted" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span style="color:var(--text3)">Cloud sync</span></li>
+            <li><svg class="check check-muted" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span style="color:var(--text3)">Collaboration</span></li>
+          </ul>
+          <a href="https://github.com/gnznaki/TrackFlowRelease/releases/tag/v1.2.1" class="btn btn-ghost" style="width:100%;justify-content:center;padding:12px 0" target="_blank" rel="noopener">Download Free</a>
+        </div>
 
+        <div class="pricing-card featured reveal" style="transition-delay:0.12s">
+          <div class="pricing-badge">Coming Soon</div>
+          <div class="pricing-name" style="color:var(--accent)">Premium</div>
+          <div class="pricing-price" style="color:var(--accent)">$15</div>
+          <div class="pricing-price-sub">one-time · no subscription · ever</div>
+          <ul class="pricing-features">
+            <li><svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Everything in Free</li>
+            <li><svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Cloud backup &amp; sync</li>
+            <li><svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Share boards in real-time</li>
+            <li><svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Invite collaborators by email</li>
+            <li><svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Role-based access control</li>
+            <li><svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Multi-device state sync</li>
+          </ul>
+          <div style="width:100%;padding:13px 0;background:rgba(200,255,71,0.06);border:1px solid rgba(200,255,71,0.18);border-radius:8px;text-align:center;font-size:12px;font-weight:800;color:rgba(200,255,71,0.45);letter-spacing:0.1em;font-family:var(--mono)">COMING SOON</div>
+          <div style="font-size:11px;color:var(--text3);text-align:center;margin-top:10px;font-family:var(--mono)">Free forever for core features</div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <div class="divider"></div>
+  <!-- CTA BAND -->
+  <div class="cta-band">
+    <div class="display-heading reveal" style="font-size:clamp(72px, 12vw, 160px)">GET IT<br /><span class="accent">FREE.</span></div>
+    <p class="cta-band-sub reveal" style="transition-delay:0.1s">Windows 10 / 11 · 64-bit · No account required to get started.</p>
+    <div class="reveal" style="transition-delay:0.18s">
+      <a href="https://github.com/gnznaki/TrackFlowRelease/releases/tag/v1.2.1" class="btn btn-primary btn-xl" target="_blank" rel="noopener" style="font-size:16px;padding:16px 44px">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download for Windows
+      </a>
+    </div>
+  </div>
 
   <!-- DOWNLOAD -->
-  <section id="download">
-    <div class="section-label">Download</div>
-    <div class="section-title">Get TrackFlow — Free</div>
-    <div class="section-sub">Native Windows desktop app. No account required to get started.</div>
+  <section id="download" style="padding:0;max-width:100%;margin:0">
+    <div style="padding:120px 48px;max-width:1280px;margin:0 auto;">
+      <div class="section-tag reveal">Download</div>
+      <div class="display-heading reveal" style="transition-delay:0.08s">INSTALL IN<br /><span class="accent">60 SECONDS.</span></div>
 
-    <div style="margin-top:36px;text-align:center">
-      <a href="https://github.com/gnznaki/TrackFlowRelease/releases/tag/v1.2.1" class="btn btn-primary" target="_blank" rel="noopener" style="font-size:15px;padding:14px 36px">
-        Download for Windows — Free
-      </a>
-      <div style="font-size:12px;color:var(--text3);margin-top:12px">Windows 10 / 11 · 64-bit · No subscription</div>
-    </div>
-
-    <div class="download-grid">
-
-      <!-- Install steps -->
-      <div>
-        <div style="font-size:13px;font-weight:700;color:var(--text2);margin-bottom:20px;text-transform:uppercase;letter-spacing:0.06em">Installation guide</div>
-        <div class="install-steps">
-          <div class="install-step">
-            <div class="install-step-num">1</div>
-            <div class="install-step-body">
-              <strong>Download the installer</strong>
-              <span>Click the button above. GitHub will download a <code style="font-family:Space Mono;background:rgba(255,255,255,0.06);padding:1px 5px;border-radius:4px">.exe</code> setup file directly to your computer.</span>
+      <div class="download-grid">
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:28px;text-transform:uppercase;letter-spacing:0.1em;font-family:var(--mono)" class="reveal">Installation</div>
+          <div class="install-steps">
+            <div class="install-step reveal" style="transition-delay:0.05s">
+              <div class="install-step-num">1</div>
+              <div class="install-step-body">
+                <strong>Download the installer</strong>
+                <span>Click the download button. GitHub delivers a <code style="font-family:var(--mono);background:rgba(255,255,255,0.06);padding:1px 5px;border-radius:4px">.exe</code> setup file directly.</span>
+              </div>
+            </div>
+            <div class="install-step reveal" style="transition-delay:0.1s">
+              <div class="install-step-num">2</div>
+              <div class="install-step-body">
+                <strong>Run the installer</strong>
+                <span>Double-click the downloaded file. Windows may show a SmartScreen security prompt — this is expected.</span>
+              </div>
+            </div>
+            <div class="install-step reveal" style="transition-delay:0.15s">
+              <div class="install-step-num">3</div>
+              <div class="install-step-body">
+                <strong>Click "More info" → "Run anyway"</strong>
+                <span>On the SmartScreen popup click <strong style="color:var(--text)">"More info"</strong> then <strong style="color:var(--text)">"Run anyway"</strong>. TrackFlow installs normally.</span>
+              </div>
+            </div>
+            <div class="install-step reveal" style="transition-delay:0.2s">
+              <div class="install-step-num">4</div>
+              <div class="install-step-body">
+                <strong>You're in</strong>
+                <span>TrackFlow launches automatically. No login required — point it at your project folders and start organizing.</span>
+              </div>
             </div>
           </div>
-          <div class="install-step">
-            <div class="install-step-num">2</div>
-            <div class="install-step-body">
-              <strong>Run the installer</strong>
-              <span>Double-click the downloaded file. Windows may show a SmartScreen security prompt — this is expected (see the note on the right).</span>
-            </div>
+        </div>
+
+        <div>
+          <div style="font-size:11px;font-weight:700;color:var(--text2);margin-bottom:28px;text-transform:uppercase;letter-spacing:0.1em;font-family:var(--mono)" class="reveal">Security &amp; trust</div>
+
+          <div class="security-box reveal" style="transition-delay:0.06s">
+            <div class="security-box-title">⚠ You will always see a Windows security warning</div>
+            <p>This is <strong style="color:var(--text)">completely normal</strong>. TrackFlow is not yet signed with a paid Windows code-signing certificate. Microsoft SmartScreen warns about any app that hasn't built reputation through a certificate authority.</p>
+            <p>This <strong style="color:var(--text)">does not mean the app is dangerous</strong>. Clicking "More info" → "Run anyway" is the correct action.</p>
           </div>
-          <div class="install-step">
-            <div class="install-step-num">3</div>
-            <div class="install-step-body">
-              <strong>Click "More info" → "Run anyway"</strong>
-              <span>On the SmartScreen popup, click <strong style="color:var(--text)">"More info"</strong> at the bottom left, then click <strong style="color:var(--text)">"Run anyway"</strong>. TrackFlow will install normally.</span>
-            </div>
+
+          <div class="virustotal-note reveal" style="transition-delay:0.1s">
+            <strong style="color:var(--text2);display:block;margin-bottom:8px">Every release is scanned before publishing</strong>
+            The v1.2.1 VirusTotal scan shows <strong style="color:var(--text)">68 of 71 engines clean</strong>. <a href="https://www.virustotal.com/gui/file/0f66bdabe0975a235539f9fee63dcb036d129c76ce551f14d48d84682eb0c636/detection" target="_blank" rel="noopener" style="font-weight:700">View the full results →</a>
+            <p style="margin:10px 0 0;font-size:12px;color:var(--text2);line-height:1.7">
+              The 3 flagging engines (Sophos, SecureAge, Arctic Wolf) use heuristic ML detection only — none match a known malware signature. Every major engine — Windows Defender, Kaspersky, ESET, Bitdefender, Avast, Norton, Malwarebytes — reports <strong style="color:var(--text)">clean</strong>.
+            </p>
           </div>
-          <div class="install-step">
-            <div class="install-step-num">4</div>
-            <div class="install-step-body">
-              <strong>You're in</strong>
-              <span>TrackFlow launches automatically after install. No login required — just point it at your project folders and start organizing.</span>
-            </div>
+
+          <div style="font-size:12px;color:var(--text3);line-height:1.7" class="reveal" style="transition-delay:0.14s">
+            TrackFlow is open source. Review the full source code on
+            <a href="https://github.com/gnznaki/TrackFlowRelease" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">GitHub</a>
+            at any time.
           </div>
         </div>
       </div>
-
-      <!-- Security info -->
-      <div>
-        <div style="font-size:13px;font-weight:700;color:var(--text2);margin-bottom:20px;text-transform:uppercase;letter-spacing:0.06em">Security &amp; trust</div>
-
-        <div class="security-box">
-          <div class="security-box-title">
-            ⚠ You will always see a Windows security warning
-          </div>
-          <p>
-            This is <strong style="color:var(--text)">completely normal</strong> and expected. TrackFlow is not yet signed with a paid Windows code-signing certificate. Microsoft SmartScreen warns about any app that hasn't built up a reputation through a certificate authority — including legitimate, safe software.
-          </p>
-          <p>
-            This <strong style="color:var(--text)">does not mean the app is dangerous</strong>. It means it hasn't paid Microsoft for a certificate yet. Clicking "More info" → "Run anyway" is the correct action.
-          </p>
-        </div>
-
-        <div class="virustotal-note">
-          <strong style="color:var(--text2);display:block;margin-bottom:8px">Every release is scanned before publishing</strong>
-          The v1.2.1 VirusTotal scan shows <strong style="color:var(--text)">68 of 71 engines clean</strong>. <a href="https://www.virustotal.com/gui/file/0f66bdabe0975a235539f9fee63dcb036d129c76ce551f14d48d84682eb0c636/detection" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700">View the full results →</a>
-          <p style="margin:10px 0 0;font-size:11px;color:var(--text3);line-height:1.7">
-            The 3 flagging engines (Sophos, SecureAge, Arctic Wolf) use heuristic ML detection only — none match a known malware signature. This is a documented false positive pattern for newly compiled, unsigned apps. Every major engine — Windows Defender, Kaspersky, ESET, Bitdefender, Avast, Norton, Malwarebytes — reports <strong style="color:var(--text2)">clean</strong>.
-          </p>
-        </div>
-
-        <div style="margin-top:14px;font-size:11px;color:var(--text3);line-height:1.7">
-          TrackFlow is open source. You can review the full source code on
-          <a href="https://github.com/gnznaki/TrackFlowRelease" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none">GitHub</a>
-          at any time.
-        </div>
-      </div>
-
     </div>
   </section>
-
-  <div class="divider"></div>
 
   <!-- FOOTER -->
   <footer>
     <div class="footer-left">
-      <div class="nav-logo-dot"></div>
+      <div style="width:8px;height:8px;border-radius:2px;background:var(--accent)"></div>
       <span class="footer-copy">© 2025 TrackFlow. All rights reserved.</span>
     </div>
     <div class="footer-links">
@@ -1482,55 +1742,71 @@
   </footer>
 
   <script>
-  // ── Scroll-triggered column entrance ──────────────────────────────────────
+  // ── Nav scroll state ──────────────────────────────────────────────────────
   (function() {
-    var cols = document.querySelectorAll('.anim-col');
+    var nav = document.getElementById('main-nav');
+    function onScroll() {
+      if (window.scrollY > 20) nav.classList.add('scrolled');
+      else nav.classList.remove('scrolled');
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
+  // ── Universal scroll reveal ───────────────────────────────────────────────
+  (function() {
+    var els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+    if (!els.length) return;
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('revealed');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(function(el) { io.observe(el); });
+  })();
+
+  // ── Anim board scroll trigger ─────────────────────────────────────────────
+  (function() {
+    var cols  = document.querySelectorAll('.anim-col');
     var board = document.getElementById('anim-board');
     if (!board) return;
-
     var io = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           cols.forEach(function(c) { c.classList.add('anim-visible'); });
           io.disconnect();
-          setTimeout(startDragAnim, 800); // start drag demo after columns have settled
+          setTimeout(startDragAnim, 800);
         }
       });
     }, { threshold: 0.35 });
-
     io.observe(board);
   })();
 
-  // ── Board drag animation ───────────────────────────────────────────────────
+  // ── Board drag animation ──────────────────────────────────────────────────
   function startDragAnim() {
-    var board    = document.getElementById('anim-board');
-    var flyCard  = document.getElementById('anim-flying');
-    var ghost    = document.getElementById('anim-ghost');
-    var cursor   = document.getElementById('anim-cursor');
+    var board   = document.getElementById('anim-board');
+    var flyCard = document.getElementById('anim-flying');
+    var ghost   = document.getElementById('anim-ghost');
+    var cursor  = document.getElementById('anim-cursor');
     if (!board || !flyCard || !ghost || !cursor) return;
 
-    var running = false;
-
     function measure() {
-      var br   = board.getBoundingClientRect();
-      var gr   = ghost.getBoundingClientRect();
-      var dz   = document.getElementById('anim-drop-zone');
-      var dzr  = dz.getBoundingClientRect();
-
-      // Flying card starts at same position as ghost
+      var br  = board.getBoundingClientRect();
+      var gr  = ghost.getBoundingClientRect();
+      var dz  = document.getElementById('anim-drop-zone');
+      var dzr = dz.getBoundingClientRect();
       flyCard.style.left  = (gr.left  - br.left) + 'px';
       flyCard.style.top   = (gr.top   - br.top)  + 'px';
       flyCard.style.width = gr.width  + 'px';
-
-      // Compute where it needs to land (drop zone, same left offset as ghost within its col)
-      var col3     = board.querySelector('.anim-col:nth-child(3)');
-      var col3r    = col3.getBoundingClientRect();
-      var dx = (col3r.left + 12) - gr.left;                 // horizontal travel
-      var dy = (dzr.top - br.top) - (gr.top - br.top) + 16; // vertical: where inside col3
-
+      var col3  = board.querySelector('.anim-col:nth-child(3)');
+      var col3r = col3.getBoundingClientRect();
+      var dx = (col3r.left + 12) - gr.left;
+      var dy = (dzr.top - br.top) - (gr.top - br.top) + 16;
       board.style.setProperty('--fly-dx', dx + 'px');
       board.style.setProperty('--fly-dy', dy + 'px');
-
       return { dx: dx, dy: dy, cursorOffX: gr.width * 0.55, cursorOffY: 14 };
     }
 
@@ -1544,85 +1820,231 @@
     function setPhase(name) {
       board.classList.remove('is-lifting','is-dragging','is-over-target','is-dropping','is-settled');
       if (name) board.classList.add(name);
-      if (name === 'is-dragging' || name === 'is-over-target') board.classList.add('is-over-target');
+      if (name === 'is-dragging') board.classList.add('is-over-target');
     }
 
     async function cycle() {
       var pos = measure();
       board.style.setProperty('--cur-ox', pos.cursorOffX + 'px');
       board.style.setProperty('--cur-oy', pos.cursorOffY + 'px');
-
-      // Reset flying card
       flyCard.style.transition = 'none';
       cursor.style.transition  = 'none';
       setTransform(0, 0, 0, 1);
       flyCard.style.opacity = '0';
       cursor.style.opacity  = '0';
       setPhase(null);
-
       await sleep(100);
-
-      // Fade in at source
       flyCard.style.transition = 'opacity 0.35s ease';
       flyCard.style.opacity = '1';
-      cursor.style.transition  = 'opacity 0.25s ease';
-
+      cursor.style.transition = 'opacity 0.25s ease';
       await sleep(600);
-
-      // Lift
       setPhase('is-lifting');
-      flyCard.style.transition =
-        'transform 0.42s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s ease, border-color 0.25s ease, background 0.25s ease, opacity 0.3s ease';
+      flyCard.style.transition = 'transform 0.42s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s ease, border-color 0.25s ease, background 0.25s ease, opacity 0.3s ease';
       cursor.style.transition  = 'transform 0.42s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease';
       setTransform(0, -16, 2.2, 1.055);
-
       await sleep(520);
-
-      // Start drag — show drop zone, begin glide
       setPhase('is-dragging');
-      flyCard.style.transition =
-        'transform 1.75s cubic-bezier(0.4,0,0.25,1), box-shadow 0.35s ease, border-color 0.25s ease';
+      flyCard.style.transition = 'transform 1.75s cubic-bezier(0.4,0,0.25,1), box-shadow 0.35s ease, border-color 0.25s ease';
       cursor.style.transition  = 'transform 1.75s cubic-bezier(0.4,0,0.25,1), opacity 0.2s ease';
       setTransform(pos.dx, -16, 2.2, 1.055);
-
       await sleep(1800);
-
-      // Drop
       setPhase('is-dropping');
-      flyCard.style.transition =
-        'transform 0.38s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.3s ease, border-color 0.25s ease';
+      flyCard.style.transition = 'transform 0.38s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.3s ease, border-color 0.25s ease';
       cursor.style.transition  = 'transform 0.38s cubic-bezier(0.175,0.885,0.32,1.275)';
       setTransform(pos.dx, pos.dy, 0.4, 1.02);
-
       await sleep(420);
-
-      // Settle
       setPhase('is-settled');
-      flyCard.style.transition =
-        'transform 0.18s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease';
+      flyCard.style.transition = 'transform 0.18s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease';
       cursor.style.transition  = 'opacity 0.2s ease';
       cursor.style.opacity = '0';
       setTransform(pos.dx, pos.dy + 3, 0, 1);
-
       await sleep(900);
-
-      // Fade out
       flyCard.style.transition = 'opacity 0.35s ease';
       flyCard.style.opacity = '0';
       setPhase(null);
-
       await sleep(600);
     }
 
-    async function loop() {
-      while (true) {
-        await cycle();
-        await sleep(300);
-      }
-    }
-
+    async function loop() { while (true) { await cycle(); await sleep(300); } }
     loop();
   }
+
+  // ── Scroll progress bar ───────────────────────────────────────────────────
+  (function() {
+    var bar = document.getElementById('scroll-progress');
+    if (!bar) return;
+    window.addEventListener('scroll', function() {
+      var docH = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (docH > 0 ? window.scrollY / docH * 100 : 0) + '%';
+    }, { passive: true });
+  })();
+
+  // ── Hero scroll parallax ──────────────────────────────────────────────────
+  (function() {
+    var heroLeft  = document.querySelector('.hero-left');
+    var heroRight = document.querySelector('.hero-right');
+    var heroGlow  = document.querySelector('.hero-glow');
+    var heroEl    = document.querySelector('.hero');
+    if (!heroLeft || !heroEl) return;
+    window.addEventListener('scroll', function() {
+      var y = Math.min(window.scrollY, window.innerHeight * 1.4);
+      heroLeft.style.transform  = 'translateY(' + (y * 0.18) + 'px)';
+      if (heroRight) heroRight.style.transform = 'translateY(' + (y * 0.09) + 'px)';
+      if (heroGlow)  heroGlow.style.transform  = 'translateY(' + (y * -0.07) + 'px) scale(' + (1 + y * 0.0002) + ')';
+    }, { passive: true });
+  })();
+
+  // ── Hero board mouse parallax ─────────────────────────────────────────────
+  (function() {
+    var tilt  = document.querySelector('.board-tilt');
+    var hero  = document.querySelector('.hero');
+    if (!tilt || !hero) return;
+    var targetX = 0, targetY = 0, curX = 0, curY = 0;
+    var isHovering = false;
+    var BASE_RX = 14, BASE_RY = -22, BASE_RZ = 3;
+
+    hero.addEventListener('mousemove', function(e) {
+      var r = hero.getBoundingClientRect();
+      targetX = ((e.clientX - r.left) / r.width  - 0.5) * 2;
+      targetY = ((e.clientY - r.top)  / r.height - 0.5) * 2;
+      isHovering = true;
+    });
+
+    hero.addEventListener('mouseleave', function() {
+      isHovering = false;
+      targetX = 0; targetY = 0;
+    });
+
+    (function raf() {
+      curX += (targetX - curX) * 0.052;
+      curY += (targetY - curY) * 0.052;
+      var moving = Math.abs(curX) > 0.0015 || Math.abs(curY) > 0.0015;
+      if (isHovering || moving) {
+        var rX = BASE_RX - curY * 5;
+        var rY = BASE_RY + curX * 8;
+        tilt.style.animation = 'none';
+        tilt.style.transform = 'rotateX(' + rX + 'deg) rotateY(' + rY + 'deg) rotateZ(' + BASE_RZ + 'deg)';
+      } else if (!isHovering && !moving) {
+        tilt.style.animation = '';
+        tilt.style.transform  = '';
+        curX = 0; curY = 0;
+      }
+      requestAnimationFrame(raf);
+    })();
+  })();
+
+  // ── Section tag character scramble ────────────────────────────────────────
+  (function() {
+    var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ·0123456789';
+
+    function scramble(el) {
+      var finalText = el.getAttribute('data-scramble-text');
+      if (!finalText) return;
+      var len = finalText.length;
+      var iter = 0;
+      var maxIter = Math.max(len * 2.5, 16);
+      var id = setInterval(function() {
+        el.textContent = finalText.split('').map(function(ch, i) {
+          if (ch === ' ') return ' ';
+          if (i < (iter / maxIter) * len * 1.3) return finalText[i];
+          return CHARS[Math.floor(Math.random() * CHARS.length)];
+        }).join('');
+        iter++;
+        if (iter > maxIter) {
+          clearInterval(id);
+          el.textContent = finalText;
+        }
+      }, 32);
+    }
+
+    var tags = document.querySelectorAll('.section-tag');
+    tags.forEach(function(t) {
+      t.setAttribute('data-scramble-text', t.textContent.trim().toUpperCase());
+    });
+
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (!e.isIntersecting) return;
+        scramble(e.target);
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.85 });
+
+    tags.forEach(function(t) { io.observe(t); });
+  })();
+
+  // ── Feature & step card 3D tilt ────────────────────────────────────────────
+  (function() {
+    var cards = document.querySelectorAll('.feature-card, .step-card');
+    cards.forEach(function(card) {
+      card.addEventListener('mouseenter', function() {
+        card.style.transition = 'transform 0.15s ease, background 0.2s, box-shadow 0.2s';
+      });
+      card.addEventListener('mousemove', function(e) {
+        var r = card.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width  - 0.5;
+        var y = (e.clientY - r.top)  / r.height - 0.5;
+        card.style.transform = 'perspective(700px) rotateX(' + (-y * 7) + 'deg) rotateY(' + (x * 7) + 'deg) scale(1.018)';
+      });
+      card.addEventListener('mouseleave', function() {
+        card.style.transition = 'transform 0.45s cubic-bezier(0.16,1,0.3,1), background 0.2s, box-shadow 0.2s';
+        card.style.transform = '';
+      });
+    });
+  })();
+
+  // ── Stat counter animation ────────────────────────────────────────────────
+  (function() {
+    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+    function countUp(el, toVal, dur) {
+      var span = el.querySelector('span');
+      var spanHTML = span ? span.outerHTML : '';
+      var t0 = null;
+      (function step(ts) {
+        if (!t0) t0 = ts;
+        var p = Math.min((ts - t0) / dur, 1);
+        el.innerHTML = Math.round(easeOut(p) * toVal) + spanHTML;
+        if (p < 1) requestAnimationFrame(step);
+      })(performance.now());
+    }
+
+    var data = [
+      { nth: 1, to: 4,  dur: 1100 },
+      { nth: 3, to: 2,  dur:  900 },
+    ];
+
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (!e.isIntersecting) return;
+        var statItems = document.querySelectorAll('.stat-item');
+        statItems.forEach(function(item, idx) {
+          data.forEach(function(d) {
+            if (d.nth - 1 === idx && e.target === item) {
+              countUp(item.querySelector('.stat-num'), d.to, d.dur);
+            }
+          });
+        });
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.6 });
+
+    document.querySelectorAll('.stat-item').forEach(function(el) { io.observe(el); });
+  })();
+
+  // ── Smooth anchor scroll with offset for fixed nav ─────────────────────────
+  (function() {
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        var target = document.querySelector(a.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        var offset = 64;
+        var top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      });
+    });
+  })();
   </script>
 </body>
 </html>
