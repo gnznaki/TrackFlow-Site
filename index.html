@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TrackFlow — Organize Your DAW Projects</title>
-  <meta name="description" content="TrackFlow automatically finds your FL Studio, Ableton, Pro Tools, Reaper, and Logic Pro projects and lets you organize them your way. Built for producers and engineers." />
+  <meta name="description" content="TrackFlow automatically finds your FL Studio, Ableton, Pro Tools, and Reaper projects and lets you organize them your way. Built for producers and engineers. Mac support in development." />
   <meta property="og:title" content="TrackFlow — Organize Your DAW Projects" />
   <meta property="og:description" content="Stop digging through folders. TrackFlow turns your DAW projects into a visual board you can actually work with." />
   <meta property="og:type" content="website" />
@@ -28,7 +28,6 @@
       --ab:       #47c8ff;
       --pt:       #4780ff;
       --rp:       #d44a3a;
-      --lg:       #3d78d0;
     }
 
     html { scroll-behavior: smooth; }
@@ -968,7 +967,7 @@
       For Producers &amp; Engineers
     </div>
     <h1>Your DAW projects.<br /><span>Finally organized.</span></h1>
-    <p>TrackFlow automatically finds your FL Studio, Ableton, Pro Tools, Reaper, and Logic Pro projects and turns them into a visual board you can actually work with.</p>
+    <p>TrackFlow automatically finds your FL Studio, Ableton, Pro Tools, and Reaper projects and turns them into a visual board you can actually work with. <span style="color:var(--text3);font-size:13px">Mac &amp; Logic Pro support in development.</span></p>
     <div class="hero-ctas">
       <a href="https://github.com/gnznaki/TrackFlowRelease/releases/tag/v1.2.1" class="btn btn-primary" target="_blank" rel="noopener">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -981,7 +980,7 @@
       <div class="daw-badge"><div class="daw-dot" style="background:var(--ab)"></div><span style="color:var(--ab)">Ableton</span></div>
       <div class="daw-badge"><div class="daw-dot" style="background:var(--pt)"></div><span style="color:var(--pt)">Pro Tools</span></div>
       <div class="daw-badge"><div class="daw-dot" style="background:var(--rp)"></div><span style="color:var(--rp)">Reaper</span></div>
-      <div class="daw-badge"><div class="daw-dot" style="background:var(--lg)"></div><span style="color:var(--lg)">Logic Pro</span></div>
+      <div class="daw-badge" style="opacity:0.45" title="Mac + Logic Pro support in development"><div class="daw-dot" style="background:#3d78d0"></div><span style="color:#3d78d0">Logic Pro <span style="font-size:9px;opacity:0.8">(soon)</span></span></div>
     </div>
 
     <!-- Board Preview -->
@@ -1178,7 +1177,7 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         </div>
         <div class="feature-title">Auto-scan DAW files</div>
-        <div class="feature-desc">Point TrackFlow at your drives and it finds every .flp, .als, .ptx, .rpp, and .logicx file automatically. No manual importing.</div>
+        <div class="feature-desc">Point TrackFlow at your drives and it finds every .flp, .als, .ptx, .rpp file automatically. No manual importing.</div>
       </div>
 
       <div class="feature-card">
@@ -1202,7 +1201,7 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
         </div>
         <div class="feature-title">One-click open in DAW</div>
-        <div class="feature-desc">Click any card to open the project file directly in FL Studio, Ableton, Pro Tools, Reaper, or Logic Pro. No finder, no file browser.</div>
+        <div class="feature-desc">Click any card to open the project file directly in FL Studio, Ableton, Pro Tools, or Reaper. No finder, no file browser.</div>
       </div>
 
       <div class="feature-card">
@@ -1244,7 +1243,7 @@
         <div class="step-num">02</div>
         <div class="step-body">
           <div class="step-title">Point it at your folders</div>
-          <div class="step-desc">Select the folders where you keep your DAW projects. TrackFlow scans them and finds every .flp, .als, .ptx, .rpp, and .logicx file automatically.</div>
+          <div class="step-desc">Select the folders where you keep your DAW projects. TrackFlow scans them and finds every .flp, .als, .ptx, and .rpp file automatically.</div>
         </div>
       </div>
       <div class="step">
@@ -1450,8 +1449,9 @@
         </div>
 
         <div class="virustotal-note">
-          <strong style="color:var(--text2);display:block;margin-bottom:6px">Every release is scanned before publishing</strong>
-          We run each build through <a href="https://www.virustotal.com" target="_blank" rel="noopener">VirusTotal</a> before it's released. You can independently verify any release by uploading the installer to VirusTotal yourself — it will confirm the file is clean.
+          <strong style="color:var(--text2);display:block;margin-bottom:6px">Every release is independently verified</strong>
+          Each build is scanned through VirusTotal before publishing. <a href="https://www.virustotal.com/gui/file/VIRUSTOTAL_HASH_PLACEHOLDER" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700">View the v1.2.1 scan results →</a><br />
+          <span style="font-size:11px;color:var(--text3);margin-top:5px;display:block">0 detections across 70+ antivirus engines. You can also verify yourself by uploading the installer directly to <a href="https://www.virustotal.com" target="_blank" rel="noopener" style="color:var(--text2)">virustotal.com</a>.</span>
         </div>
 
         <div style="margin-top:14px;font-size:11px;color:var(--text3);line-height:1.7">
