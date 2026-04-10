@@ -495,6 +495,8 @@
 
     .anim-col {
       flex: 1;
+      opacity: 1;
+      transform: none;
       background: var(--surface);
       border: 1px solid var(--border2);
       border-radius: 12px;
@@ -503,9 +505,7 @@
       flex-direction: column;
       gap: 8px;
       min-width: 0;
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.35s ease, background 0.35s ease;
+      transition: border-color 0.35s ease, background 0.35s ease;
     }
 
     .anim-col.anim-visible { opacity: 1; transform: translateY(0); }
@@ -1609,21 +1609,11 @@
   })();
 
 
-  // ── Anim board scroll trigger ─────────────────────────────────────────────
+  // ── Anim board trigger (immediate) ───────────────────────────────────────
   (function() {
-    var cols  = document.querySelectorAll('.anim-col');
     var board = document.getElementById('anim-board');
     if (!board) return;
-    var io = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          cols.forEach(function(c) { c.classList.add('anim-visible'); });
-          io.disconnect();
-          setTimeout(startDragAnim, 800);
-        }
-      });
-    }, { threshold: 0.35 });
-    io.observe(board);
+    setTimeout(startDragAnim, 600);
   })();
 
   // ── Board drag animation ──────────────────────────────────────────────────
