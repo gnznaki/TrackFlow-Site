@@ -446,7 +446,7 @@
 
     /* ── SECTIONS BASE ──────────────────────────────────────────────────────── */
     .section {
-      padding: 120px 48px;
+      padding: 80px 48px;
       max-width: 1280px;
       margin: 0 auto;
     }
@@ -483,7 +483,7 @@
 
     /* ── IN ACTION ──────────────────────────────────────────────────────────── */
     #in-action {
-      padding: 120px 48px;
+      padding: 80px 48px;
       max-width: 1280px;
       margin: 0 auto;
     }
@@ -676,7 +676,7 @@
     #features { background: var(--surface); }
 
     .features-inner {
-      padding: 120px 48px;
+      padding: 80px 48px;
       max-width: 1280px;
       margin: 0 auto;
     }
@@ -704,6 +704,68 @@
       border: 1px solid var(--border);
       border-radius: 14px;
       overflow: hidden;
+    }
+
+    /* ── FEATURE SPEC GRID ───────────────────────────────────────────────────── */
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .feat-group {
+      background: var(--surface);
+      padding: 28px 26px 30px;
+      transition: background 0.2s;
+    }
+
+    .feat-group:hover { background: var(--surface2); }
+
+    .feat-group-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: var(--mono);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .feat-group-title svg { stroke: var(--accent); flex-shrink: 0; }
+
+    .feat-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .feat-list li {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.55;
+      padding-left: 14px;
+      position: relative;
+    }
+
+    .feat-list li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--text3);
+    }
+
+    .feat-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
     }
 
     .feature-card {
@@ -824,7 +886,7 @@
 
     /* ── COLLAB ──────────────────────────────────────────────────────────────── */
     .collab-section {
-      padding: 0 48px 120px;
+      padding: 0 48px 80px;
       max-width: 1280px;
       margin: 0 auto;
     }
@@ -1154,6 +1216,7 @@
       .features-inner { padding: 80px 24px; }
       .features-header { grid-template-columns: 1fr; }
       .features-grid { grid-template-columns: 1fr; }
+      .feat-grid { grid-template-columns: 1fr; }
       .steps-grid { grid-template-columns: 1fr; }
       .collab-section { padding: 0 24px 80px; }
       .collab-block { grid-template-columns: 1fr; padding: 36px 28px; gap: 40px; }
@@ -1194,7 +1257,7 @@
       <li><a href="#download">Download</a></li>
     </ul>
     <a href="#pricing" class="btn btn-primary">
-      Get TrackFlow — $10
+      Get TrackFlow
     </a>
   </nav>
 
@@ -1222,7 +1285,7 @@
         <a href="#pricing" class="btn btn-primary btn-xl">
           Get TrackFlow — $10
         </a>
-        <a href="#features" class="btn btn-ghost btn-xl">See features</a>
+        <a href="#features" class="btn btn-ghost btn-xl">See what it does</a>
       </div>
 
       <div class="daw-badges">
@@ -1320,87 +1383,90 @@
         <p class="features-header-right reveal-right">Built for the way producers actually work — not how project managers think they do.</p>
       </div>
 
-      <div class="features-grid">
-        <div class="feature-card reveal" style="transition-delay:0s">
-          <div class="feature-num">01</div>
-          <div class="feature-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <div class="feat-grid reveal" style="transition-delay:0.06s">
+
+        <div class="feat-group">
+          <div class="feat-group-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Scanning &amp; Import
           </div>
-          <div class="feature-title">Auto-scan DAW files</div>
-          <div class="feature-desc">Point TrackFlow at your drives and it finds every .flp, .als, .ptx, .rpp file automatically. No manual importing.</div>
+          <ul class="feat-list">
+            <li>Recursive folder scan — finds every project automatically</li>
+            <li>Supports <span class="feat-tag" style="color:var(--fl)">.flp</span> <span class="feat-tag" style="color:var(--ab)">.als</span> <span class="feat-tag" style="color:var(--pt)">.ptx</span> <span class="feat-tag" style="color:var(--rp)">.rpp</span> files</li>
+            <li>Re-scan on demand or add new folders any time</li>
+            <li>DAW auto-detected and shown on every card</li>
+          </ul>
         </div>
-        <div class="feature-card reveal" style="transition-delay:0.07s">
-          <div class="feature-num">02</div>
-          <div class="feature-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+
+        <div class="feat-group">
+          <div class="feat-group-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            Board &amp; Workflow
           </div>
-          <div class="feature-title">Visual kanban board</div>
-          <div class="feature-desc">Drag projects between columns — Idea, In Progress, Mixing, Done — or define your own stages entirely.</div>
+          <ul class="feat-list">
+            <li>Fully custom kanban columns — rename, reorder, add, delete</li>
+            <li>Multiple boards — separate spaces for beats, client work, EPs</li>
+            <li>Project groups in the sidebar to bundle related tracks</li>
+            <li>Drag cards between columns and rows; right-click for quick actions</li>
+            <li>Keyboard shortcuts for power users</li>
+          </ul>
         </div>
-        <div class="feature-card reveal" style="transition-delay:0.14s">
-          <div class="feature-num">03</div>
-          <div class="feature-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+
+        <div class="feat-group">
+          <div class="feat-group-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Notes &amp; Tags
           </div>
-          <div class="feature-title">Notes &amp; custom tags</div>
-          <div class="feature-desc">Add session notes, BPM, key, client info — whatever you need. Tag and filter across all your projects.</div>
+          <ul class="feat-list">
+            <li>Per-card notes — BPM, key, client name, session context</li>
+            <li>Color-coded tags — genre, status, mood, anything</li>
+            <li>Filter cards by tag across the whole board</li>
+            <li>Resizable detail panel docked to the right</li>
+          </ul>
         </div>
-        <div class="feature-card reveal" style="transition-delay:0.07s">
-          <div class="feature-num">04</div>
-          <div class="feature-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+
+        <div class="feat-group">
+          <div class="feat-group-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+            DAW Integration
           </div>
-          <div class="feature-title">One-click open in DAW</div>
-          <div class="feature-desc">Click any card to open the project file directly in FL Studio, Ableton, Pro Tools, or Reaper. No finder, no file browser.</div>
+          <ul class="feat-list">
+            <li>One click opens the project file directly in your DAW</li>
+            <li>Works while your DAW is already running</li>
+            <li>Full file path shown in the detail panel</li>
+            <li>Detects DAW even if projects are in mixed folders</li>
+          </ul>
         </div>
-        <div class="feature-card reveal" style="transition-delay:0.14s">
-          <div class="feature-num">05</div>
-          <div class="feature-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+
+        <div class="feat-group">
+          <div class="feat-group-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+            Cloud &amp; Sync
           </div>
-          <div class="feature-title">Cloud sync</div>
-          <div class="feature-desc">Your board stays in sync across every machine you work on. Switch computers without losing your place.</div>
+          <ul class="feat-list">
+            <li>Board state synced across all your machines</li>
+            <li>Auto-saves 800ms after any change</li>
+            <li>Sign in with email — no third-party login required</li>
+            <li>Profile with avatar, display name, and invite controls</li>
+          </ul>
         </div>
-        <div class="feature-card reveal" style="transition-delay:0.21s">
-          <div class="feature-num">06</div>
-          <div class="feature-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+
+        <div class="feat-group">
+          <div class="feat-group-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+            Themes &amp; Customization
           </div>
-          <div class="feature-title">Real-time collaboration</div>
-          <div class="feature-desc">Share boards with producers, engineers, or A&amp;R. Everyone sees changes live with role-based access.</div>
+          <ul class="feat-list">
+            <li>6 built-in dark themes — switch instantly</li>
+            <li>Full custom theme editor: colors, accent, borders, font</li>
+            <li>Adjustable column height caps</li>
+            <li>Producer and Engineer kanban presets</li>
+          </ul>
         </div>
+
       </div>
     </div>
   </section>
-
-  <!-- HOW IT WORKS -->
-  <div class="section" id="how-it-works">
-    <div class="section-tag reveal">How it works</div>
-    <div class="display-heading reveal" style="transition-delay:0.08s">SET UP IN<br /><span class="accent">TWO MINUTES.</span></div>
-
-    <div class="steps-grid">
-      <div class="step-card reveal" style="transition-delay:0s">
-        <div class="step-num-big">01</div>
-        <div class="step-title">Purchase and download</div>
-        <div class="step-desc">TrackFlow is a native Windows desktop app. Purchase once for $10, download the installer, and you're in.</div>
-      </div>
-      <div class="step-card reveal" style="transition-delay:0.08s">
-        <div class="step-num-big">02</div>
-        <div class="step-title">Point it at your folders</div>
-        <div class="step-desc">Select the folders where you keep your DAW projects. TrackFlow scans them and finds every .flp, .als, .ptx, and .rpp file automatically.</div>
-      </div>
-      <div class="step-card reveal" style="transition-delay:0.16s">
-        <div class="step-num-big">03</div>
-        <div class="step-title">Drag, organize, and ship</div>
-        <div class="step-desc">Move cards between columns to reflect where each project is. Add tags, notes, and open files directly in your DAW with one click.</div>
-      </div>
-      <div class="step-card reveal" style="transition-delay:0.24s">
-        <div class="step-num-big">04</div>
-        <div class="step-title">Collaborate</div>
-        <div class="step-desc">Share a board code with your engineer or co-producer. They join, see the same board in real-time, and can move cards based on their role.</div>
-      </div>
-    </div>
-  </div>
 
   <!-- COLLAB -->
   <div class="collab-section">
@@ -1409,7 +1475,7 @@
         <div class="section-tag">Collaboration</div>
         <div class="display-heading" style="margin-top:8px">BUILT FOR<br />THE STUDIO.</div>
         <p class="collab-sub">Share a board with your engineer, your A&R, or your co-producer. Set roles so the right people can edit, and viewers can see without breaking anything.</p>
-        <a href="#pricing" class="btn btn-primary" style="font-size:14px;padding:12px 28px">Get TrackFlow — $10</a>
+        <a href="#pricing" class="btn btn-primary" style="font-size:14px;padding:12px 28px">Get TrackFlow</a>
       </div>
       <div class="collab-visual reveal-right" style="transition-delay:0.1s">
         <div class="member-row">
@@ -1434,8 +1500,8 @@
 
   <!-- PRICING -->
   <section id="pricing" style="padding:0;max-width:100%;margin:0;background:var(--surface)">
-    <div style="padding:120px 48px;max-width:1280px;margin:0 auto;">
-      <div class="pricing-header reveal">
+    <div style="padding:80px 48px;max-width:1280px;margin:0 auto;">
+      <div class="pricing-header reveal" style="margin-bottom:40px">
         <div class="section-tag" style="justify-content:center">Pricing</div>
         <div class="display-heading" style="margin-top:12px">$10.<br /><span class="accent">ONE TIME.</span></div>
         <p class="pricing-sub">Pay once. Own it forever. No subscription, no tiers, no catch.</p>
@@ -1463,20 +1529,9 @@
     </div>
   </section>
 
-  <!-- CTA BAND -->
-  <div class="cta-band">
-    <div class="display-heading reveal" style="font-size:clamp(72px, 12vw, 160px)">GET IT.<br /><span class="accent">$10.</span></div>
-    <p class="cta-band-sub reveal" style="transition-delay:0.1s">Windows 10 / 11 · 64-bit · One-time purchase. No subscription.</p>
-    <div class="reveal" style="transition-delay:0.18s">
-      <a href="#download" class="btn btn-primary btn-xl" style="font-size:16px;padding:16px 44px">
-        Get TrackFlow — $10
-      </a>
-    </div>
-  </div>
-
   <!-- DOWNLOAD -->
   <section id="download" style="padding:0;max-width:100%;margin:0">
-    <div style="padding:120px 48px;max-width:1280px;margin:0 auto;">
+    <div style="padding:80px 48px;max-width:1280px;margin:0 auto;">
       <div class="section-tag reveal">Download</div>
       <div class="display-heading reveal" style="transition-delay:0.08s">INSTALL IN<br /><span class="accent">60 SECONDS.</span></div>
 
@@ -1543,7 +1598,7 @@
   </section>
 
   <!-- EMAIL CAPTURE -->
-  <div style="background:var(--surface2);border-top:1px solid var(--border);padding:80px 48px;text-align:center">
+  <div style="background:var(--surface2);border-top:1px solid var(--border);padding:60px 48px;text-align:center">
     <div style="max-width:520px;margin:0 auto">
       <div style="font-size:10px;font-family:var(--mono);font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--text3);margin-bottom:16px">Mac coming soon</div>
       <div style="font-family:var(--display);font-size:clamp(36px,6vw,64px);line-height:0.95;color:var(--text);margin-bottom:16px">NOT ON<br /><span style="color:var(--accent)">WINDOWS?</span></div>
