@@ -1700,20 +1700,6 @@
     loop();
   }
 
-  // ── Hero scroll parallax ──────────────────────────────────────────────────
-  (function() {
-    var heroLeft  = document.querySelector('.hero-left');
-    var heroRight = document.querySelector('.hero-right');
-    var heroGlow  = document.querySelector('.hero-glow');
-    var heroEl    = document.querySelector('.hero');
-    if (!heroLeft || !heroEl) return;
-    window.addEventListener('scroll', function() {
-      var y = Math.min(window.scrollY, window.innerHeight * 1.4);
-      heroLeft.style.transform  = 'translateY(' + (y * 0.18) + 'px)';
-      if (heroRight) heroRight.style.transform = 'translateY(' + (y * 0.09) + 'px)';
-      if (heroGlow)  heroGlow.style.transform  = 'translateY(' + (y * -0.07) + 'px) scale(' + (1 + y * 0.0002) + ')';
-    }, { passive: true });
-  })();
 
   // ── Hero board mouse parallax ─────────────────────────────────────────────
   (function() {
