@@ -164,31 +164,8 @@
       border-radius: 8px;
     }
 
-    /* ── SCROLL REVEAL SYSTEM ────────────────────────────────────────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(48px);
-      transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
-    }
-    .reveal-left {
-      opacity: 0;
-      transform: translateX(-56px);
-      transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
-    }
-    .reveal-right {
-      opacity: 0;
-      transform: translateX(56px);
-      transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
-    }
-    .reveal-scale {
-      opacity: 0;
-      transform: scale(0.92);
-      transition: opacity 0.75s cubic-bezier(0.16,1,0.3,1), transform 0.75s cubic-bezier(0.16,1,0.3,1);
-    }
-    .revealed {
-      opacity: 1 !important;
-      transform: none !important;
-    }
+    /* ── SCROLL REVEAL SYSTEM (disabled) ────────────────────────────────────── */
+    .reveal, .reveal-left, .reveal-right, .reveal-scale, .revealed { opacity: 1; transform: none; }
 
     /* ── HERO ────────────────────────────────────────────────────────────────── */
     .hero {
@@ -1631,20 +1608,6 @@
     onScroll();
   })();
 
-  // ── Universal scroll reveal ───────────────────────────────────────────────
-  (function() {
-    var els = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-    if (!els.length) return;
-    var io = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) {
-          e.target.classList.add('revealed');
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    els.forEach(function(el) { io.observe(el); });
-  })();
 
   // ── Anim board scroll trigger ─────────────────────────────────────────────
   (function() {
