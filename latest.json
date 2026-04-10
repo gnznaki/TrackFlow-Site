@@ -1,0 +1,11 @@
+{
+  "version": "2.0.0",
+  "notes": "Initial release",
+  "pub_date": "2026-04-10T00:00:00Z",
+  "platforms": {
+    "windows-x86_64": {
+      "signature": "REPLACE_WITH_SIGNATURE",
+      "url": "https://github.com/gnznaki/TrackFlowRelease/releases/download/v2.0.0/TrackFlow_2.0.0_x64-setup.exe"
+    }
+  }
+}
