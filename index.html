@@ -489,18 +489,15 @@
     }
 
     .in-action-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      margin-bottom: 64px;
-      gap: 24px;
-      flex-wrap: wrap;
+      margin-bottom: 48px;
+      max-width: 600px;
     }
 
     .in-action-sub {
       font-size: 15px;
       color: var(--text2);
-      max-width: 340px;
+      max-width: 480px;
+      margin-top: 16px;
       line-height: 1.7;
       padding-bottom: 6px;
     }
@@ -886,16 +883,15 @@
 
     /* ── COLLAB ──────────────────────────────────────────────────────────────── */
     .collab-section {
-      padding: 0 48px 80px;
-      max-width: 1280px;
-      margin: 0 auto;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
 
     .collab-block {
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      border-radius: 16px;
-      padding: 64px 64px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 80px 48px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 80px;
@@ -988,8 +984,8 @@
     }
 
     .pricing-wrap {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
+      justify-content: center;
       gap: 16px;
       max-width: 820px;
       margin: 0 auto;
@@ -1218,8 +1214,7 @@
       .features-grid { grid-template-columns: 1fr; }
       .feat-grid { grid-template-columns: 1fr; }
       .steps-grid { grid-template-columns: 1fr; }
-      .collab-section { padding: 0 24px 80px; }
-      .collab-block { grid-template-columns: 1fr; padding: 36px 28px; gap: 40px; }
+      .collab-block { grid-template-columns: 1fr; padding: 48px 24px; gap: 40px; }
       #pricing { padding: 80px 24px; }
       .pricing-wrap { grid-template-columns: 1fr; max-width: 440px; }
       #download { padding: 80px 24px; }
@@ -1230,7 +1225,6 @@
       .anim-board .anim-col:nth-child(3) { display: none; }
       .anim-card-flying, .anim-cursor { display: none; }
       #in-action { padding: 80px 24px; }
-      .in-action-header { flex-direction: column; align-items: flex-start; }
       .cta-band { padding: 60px 24px; }
     }
   </style>
@@ -1302,11 +1296,9 @@
   <!-- IN ACTION -->
   <div id="in-action">
     <div class="in-action-header">
-      <div>
-        <div class="section-tag reveal">See it work</div>
-        <div class="display-heading reveal" style="transition-delay:0.08s">ONE DRAG.<br /><span class="accent">WHOLE WORKFLOW.</span></div>
-      </div>
-      <p class="in-action-sub reveal-right">Move a project between stages as fast as you think. TrackFlow stays out of the way.</p>
+      <div class="section-tag reveal">See it work</div>
+      <div class="display-heading reveal" style="transition-delay:0.08s">ONE DRAG.<br /><span class="accent">WHOLE WORKFLOW.</span></div>
+      <p class="in-action-sub reveal" style="transition-delay:0.16s">Move a project between stages as fast as you think. TrackFlow stays out of the way.</p>
     </div>
 
     <div class="anim-board-outer reveal" style="transition-delay:0.12s">
@@ -1470,7 +1462,7 @@
 
   <!-- COLLAB -->
   <div class="collab-section">
-    <div class="collab-block">
+    <div class="collab-block" style="max-width:1280px;margin:0 auto;padding:80px 48px">
       <div class="reveal-left">
         <div class="section-tag">Collaboration</div>
         <div class="display-heading" style="margin-top:8px">BUILT FOR<br />THE STUDIO.</div>
@@ -1522,7 +1514,7 @@
             <li><svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Invite collaborators by email</li>
             <li><svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Role-based access control</li>
           </ul>
-          <a href="#download" class="btn btn-primary" style="width:100%;justify-content:center;padding:14px 0;font-size:14px">Get TrackFlow — $10</a>
+          <a href="#download" class="btn btn-primary" style="width:100%;justify-content:center;padding:14px 0;font-size:14px">Get TrackFlow</a>
           <div style="font-size:11px;color:var(--text3);text-align:center;margin-top:10px;font-family:var(--mono)">Windows 10 / 11 · 64-bit · one-time purchase</div>
         </div>
       </div>
