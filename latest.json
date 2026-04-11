@@ -4,7 +4,7 @@
   "pub_date": "2026-04-10T00:00:00Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "REPLACE_WITH_SIGNATURE",
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVSTXhnT2ZVc3FqQkc5elFsMytBSFEzMlZZTUk1Ti9ITEV6aElXMHhpZEo5Y2VQVGVuU3FXYzBXY0Zuc3ZjRi9kNnB6YXhHUExZUU5UMG9IUDdsMkZ1R3kvamduY0dMQVFnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc1ODc4NzQ2CWZpbGU6VHJhY2tGbG93XzIuMC4wX3g2NC1zZXR1cC5leGUKVGFoY2VUSVk4Z0plTW9kelEzSSs4Y3hLaDBWM1B0OEE0Q1dYRzhVVTRic05PUG1KR3dXVWVXQk5QSEI2M3NWQ0E3VzJHNXVQa1pLLzZzT2pLeEh3REE9PQo=",
       "url": "https://github.com/gnznaki/TrackFlowRelease/releases/download/v2.0.0/TrackFlow_2.0.0_x64-setup.exe"
     }
   }
