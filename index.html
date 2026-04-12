@@ -170,7 +170,7 @@
     /* ── HERO ────────────────────────────────────────────────────────────────── */
     .hero {
       min-height: 100vh;
-      padding: 120px 48px 80px;
+      padding: 152px 48px 80px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -1211,8 +1211,15 @@
   <!-- Grain -->
   <div class="grain" aria-hidden="true"></div>
 
+  <!-- BETA BANNER -->
+  <div style="position:fixed;top:0;left:0;right:0;z-index:600;background:var(--accent);padding:7px 24px;display:flex;align-items:center;justify-content:center;gap:12px;font-family:var(--mono);font-size:11px;font-weight:700;color:#080808;letter-spacing:0.08em;text-transform:uppercase">
+    <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#080808;opacity:0.5"></span>
+    Beta — You're among the first. Help shape TrackFlow.
+    <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#080808;opacity:0.5"></span>
+  </div>
+
   <!-- NAV -->
-  <nav id="main-nav">
+  <nav id="main-nav" style="top:32px">
     <a href="#" class="nav-logo">
       <div class="nav-logo-mark">
         <div class="nav-logo-bar" style="height:10px"></div>
@@ -1227,8 +1234,9 @@
       <li><a href="#download">Download</a></li>
       <li><a href="changelog.html">Changelog</a></li>
     </ul>
-    <a href="#pricing" class="btn btn-primary">
-      Get TrackFlow
+    <a href="https://github.com/gnznaki/TrackFlowRelease/releases/latest" class="btn btn-primary dl-btn" download>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download
     </a>
   </nav>
 
@@ -1239,7 +1247,7 @@
     <div class="hero-left">
       <div class="hero-eyebrow">
         <div class="hero-eyebrow-dot"></div>
-        For Producers &amp; Engineers
+        Early Access · Beta
       </div>
 
       <h1 class="hero-headline">
@@ -1253,11 +1261,13 @@
       </p>
 
       <div class="hero-ctas">
-        <a href="#pricing" class="btn btn-primary btn-xl">
-          Get TrackFlow — $10
+        <a href="https://github.com/gnznaki/TrackFlowRelease/releases/latest" class="btn btn-primary btn-xl dl-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Free Beta
         </a>
         <a href="#features" class="btn btn-ghost btn-xl">See what it does</a>
       </div>
+      <div style="margin-top:12px;font-size:11px;color:var(--text3);font-family:var(--mono)">Windows 10 / 11 · Free during beta · $10 at launch</div>
 
       <div class="daw-badges">
         <div class="daw-badge"><div class="daw-dot" style="background:var(--fl)"></div><span style="color:var(--fl)">FL Studio</span></div>
@@ -1444,7 +1454,10 @@
         <div class="section-tag">Collaboration</div>
         <div class="display-heading" style="margin-top:8px">BUILT FOR<br />THE STUDIO.</div>
         <p class="collab-sub">Share a board with your engineer, your A&R, or your co-producer. Set roles so the right people can edit, and viewers can see without breaking anything.</p>
-        <a href="#pricing" class="btn btn-primary" style="font-size:14px;padding:12px 28px">Get TrackFlow</a>
+        <a href="https://github.com/gnznaki/TrackFlowRelease/releases/latest" class="btn btn-primary dl-btn" style="font-size:14px;padding:12px 28px;gap:8px">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Free Beta
+        </a>
       </div>
       <div class="collab-visual reveal-right" style="transition-delay:0.1s">
         <div class="member-row">
@@ -1473,7 +1486,7 @@
       <div class="pricing-header reveal" style="margin-bottom:40px">
         <div class="section-tag" style="justify-content:center">Pricing</div>
         <div class="display-heading" style="margin-top:12px">$10.<br /><span class="accent">ONE TIME.</span></div>
-        <p class="pricing-sub">Pay once. Own it forever. No subscription, no tiers, no catch.</p>
+        <p class="pricing-sub">Beta is free to download and use. When it launches, it's $10 once — no subscription, ever. Early users lock in the founding price.</p>
       </div>
 
       <div class="pricing-wrap" style="justify-content:center">
@@ -1491,8 +1504,11 @@
             <li><svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Invite collaborators by email</li>
             <li><svg class="check check-accent" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Role-based access control</li>
           </ul>
-          <a href="#download" class="btn btn-primary" style="width:100%;justify-content:center;padding:14px 0;font-size:14px">Get TrackFlow</a>
-          <div style="font-size:11px;color:var(--text3);text-align:center;margin-top:10px;font-family:var(--mono)">Windows 10 / 11 · 64-bit · one-time purchase</div>
+          <a href="https://github.com/gnznaki/TrackFlowRelease/releases/latest" class="btn btn-primary dl-btn" style="width:100%;justify-content:center;padding:14px 0;font-size:14px;gap:8px">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download Free Beta
+          </a>
+          <div style="font-size:11px;color:var(--text3);text-align:center;margin-top:10px;font-family:var(--mono)">Windows 10 / 11 · 64-bit · free during beta</div>
         </div>
       </div>
     </div>
@@ -1511,8 +1527,8 @@
             <div class="install-step reveal" style="transition-delay:0.05s">
               <div class="install-step-num">1</div>
               <div class="install-step-body">
-                <strong>Purchase and download</strong>
-                <span>Complete the $10 checkout. You'll get a download link for the <code style="font-family:var(--mono);background:rgba(255,255,255,0.06);padding:1px 5px;border-radius:4px">.exe</code> setup file.</span>
+                <strong>Download the installer</strong>
+                <span>Click any Download button on this page to get the <code style="font-family:var(--mono);background:rgba(255,255,255,0.06);padding:1px 5px;border-radius:4px">.exe</code> setup file. Beta is free — pay $10 inside the app when you're ready.</span>
               </div>
             </div>
             <div class="install-step reveal" style="transition-delay:0.1s">
@@ -1807,11 +1823,29 @@
         var target = document.querySelector(a.getAttribute('href'));
         if (!target) return;
         e.preventDefault();
-        var offset = 64;
+        var offset = 96; // account for beta banner + nav
         var top = target.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top: top, behavior: 'smooth' });
       });
     });
+  })();
+
+  // ── Auto-wire latest installer URL to all download buttons ─────────────────
+  (function() {
+    var FALLBACK = 'https://github.com/gnznaki/TrackFlowRelease/releases/latest';
+    fetch('https://api.github.com/repos/gnznaki/TrackFlowRelease/releases/latest')
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        var asset = (data.assets || []).find(function(a) {
+          return a.name && a.name.endsWith('-setup.exe');
+        });
+        if (!asset) return;
+        document.querySelectorAll('.dl-btn').forEach(function(btn) {
+          btn.href = asset.browser_download_url;
+          btn.removeAttribute('download');
+        });
+      })
+      .catch(function() {}); // silently fall back to releases/latest page
   })();
   </script>
 </body>
