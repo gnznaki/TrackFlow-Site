@@ -1,11 +1,11 @@
 {
+  "notes": "See https://github.com/gnznaki/TrackFlowRelease/releases/tag/v2.2.2",
+  "pub_date": "2026-04-12T22:19:22Z",
+  "version": "2.2.2",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUaFZheVZyNFRnT2N0UmZyZWRJOC9QTTlOODBCYmVrWlpOZ0N0YTRWNU53N3RJdGFWdzVlMVdlK3hBM29oaXRnalB3dkdCTTdzaWNHdjhYOThWaDJhcTFVMDdoVW5zSlFFPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MDMxOTE4CWZpbGU6VHJhY2tGbG93XzIuMi4xX3g2NC1zZXR1cC5leGUKZEZCWmJJdFg4K0MxNk1IamlEN0UxcEJlRW5SR2pYVmJVQ0JBeEVnejVxVUNIZmx3dlZLMjVQRW1kQzdlR3FUMGJSV1NZdjR3YmFJSkxQWmtOdGF5QXc9PQo=",
-      "url": "https://github.com/gnznaki/TrackFlowRelease/releases/download/v2.2.1/TrackFlow_2.2.1_x64-setup.exe"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVUaFZheVZyNFRnT1N2QzJCRUdINVgzV01QV0RmdlcvK05qVWdoTnpVdWNQMDJvZjladjBlajJqMTJpK3RpM1RxVFhGVEh0MndaLzdRRGl0djBnUjNwMWd1ZHdyTmFtOWdJPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzc2MDMyMzU1CWZpbGU6VHJhY2tGbG93XzIuMi4yX3g2NC1zZXR1cC5leGUKZXRxdU9lQU13bG1acCtVM1psdkdMTUVSdm9kUGVRTGFPdFRxR1VQVXZxb01GSVpjRElJekgzYTZKUmVmRG5tZVB3blQ5dUlwSnR6cS9tMjNPUlh0QUE9PQo=",
+      "url": "https://github.com/gnznaki/TrackFlowRelease/releases/download/v2.2.2/TrackFlow_2.2.2_x64-setup.exe"
     }
-  },
-  "version": "2.2.1",
-  "pub_date": "2026-04-12T22:12:05Z",
-  "notes": "See https://github.com/gnznaki/TrackFlowRelease/releases/tag/v2.2.1"
+  }
 }
