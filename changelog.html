@@ -432,12 +432,117 @@
 
     <div class="cl-divider"></div>
 
-    <!-- v2.1.0 -->
+    <!-- v2.3.0 -->
     <div class="release latest">
       <div class="release-dot"></div>
       <div class="release-meta">
-        <span class="release-version">v2.1.0</span>
+        <span class="release-version">v2.3.0</span>
         <span class="release-tag tag-latest">Latest</span>
+        <span class="release-date">April 2026</span>
+      </div>
+      <div class="release-title">Updater progress, error handling, and stability fixes</div>
+      <div class="release-summary">
+        The auto-updater now shows a live download progress bar and surfaces errors clearly instead of failing silently. A "Send Report" button on update errors lets you flag issues directly. Several stability fixes to the updater pipeline across v2.2.x.
+      </div>
+
+      <div class="change-groups">
+        <div>
+          <div class="change-group-label">Improved</div>
+          <div class="change-list">
+            <div class="change-item">
+              <span class="change-bullet bullet-imp"></span>
+              Auto-updater shows live download progress bar during update
+            </div>
+            <div class="change-item">
+              <span class="change-bullet bullet-imp"></span>
+              Update errors now display clearly with a "Send Report" button
+            </div>
+            <div class="change-item">
+              <span class="change-bullet bullet-imp"></span>
+              Retry option on failed updates
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="change-group-label">Fixed</div>
+          <div class="change-list">
+            <div class="change-item">
+              <span class="change-bullet bullet-fix"></span>
+              Updater 404 on public release repo resolved
+            </div>
+            <div class="change-item">
+              <span class="change-bullet bullet-fix"></span>
+              Stripe CSP: js.stripe.com and api.stripe.com now correctly allowed
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="release-dl">
+        <a href="https://github.com/gnznaki/TrackFlowRelease/releases/latest" target="_blank" rel="noopener">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download v2.3.0 installer
+        </a>
+      </div>
+    </div>
+
+    <!-- v2.2.0 -->
+    <div class="release">
+      <div class="release-dot"></div>
+      <div class="release-meta">
+        <span class="release-version">v2.2.0</span>
+        <span class="release-tag tag-stable">Stable</span>
+        <span class="release-date">April 2026</span>
+      </div>
+      <div class="release-title">Auto BPM/Key tags and error reporting</div>
+      <div class="release-summary">
+        Cards can now automatically detect and display BPM and Key as pill badges. Error reporting is baked in — crashes and runtime errors are captured automatically and surfaced with a manual report button.
+      </div>
+
+      <div class="change-groups">
+        <div>
+          <div class="change-group-label">New</div>
+          <div class="change-list">
+            <div class="change-item">
+              <span class="change-bullet bullet-new"></span>
+              Auto BPM tag: toggle in sort/filter dropdown to show BPM as a card badge
+            </div>
+            <div class="change-item">
+              <span class="change-bullet bullet-new"></span>
+              Auto Key tag: same toggle for musical key detection
+            </div>
+            <div class="change-item">
+              <span class="change-bullet bullet-new"></span>
+              Error report buttons on crash and runtime error screens
+            </div>
+            <div class="change-item">
+              <span class="change-bullet bullet-new"></span>
+              Supabase error logging table with automatic crash capture
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="change-group-label">Fixed</div>
+          <div class="change-list">
+            <div class="change-item">
+              <span class="change-bullet bullet-fix"></span>
+              Supabase connection reliability improvements
+            </div>
+            <div class="change-item">
+              <span class="change-bullet bullet-fix"></span>
+              Role enforcement tightened for editor vs viewer permissions
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- v2.1.0 -->
+    <div class="release">
+      <div class="release-dot"></div>
+      <div class="release-meta">
+        <span class="release-version">v2.1.0</span>
+        <span class="release-tag tag-stable">Stable</span>
         <span class="release-date">April 2026</span>
       </div>
       <div class="release-title">Auto-updater, Reaper support, and trial mode</div>
